@@ -5,9 +5,8 @@
  */
 package com.mindthehippo.budget.application;
 
-import com.mindthehippo.budget.application.dto.GoalDTO;
+import com.mindthehippo.budget.application.dto.BudgetDTO;
 import com.mindthehippo.budget.application.dto.ItemDTO;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -17,9 +16,7 @@ import java.util.UUID;
 public interface BudgetApplicationService {
     
     
-    public List<ItemDTO> getItens(UUID budget);
+    public BudgetDTO get(UUID account);
     
-    public List<GoalDTO> getGoals(UUID budget);
-
-    void armazenar(ItemDTO itemDTO);
+    void store(UUID account, ItemDTO itemDTO);
 }

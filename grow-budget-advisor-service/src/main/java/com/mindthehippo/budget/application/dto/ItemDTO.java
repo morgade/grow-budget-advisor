@@ -12,13 +12,15 @@ package com.mindthehippo.budget.application.dto;
 public class ItemDTO {
 
     private float amount;
+    private String text;
     private String category;
 
     public ItemDTO() {
     }
 
-    public ItemDTO(float amount, String category) {
+    public ItemDTO(float amount, String text, String category) {
         this.amount = amount;
+        this.text = text;
         this.category = category;
     }
 
@@ -38,4 +40,12 @@ public class ItemDTO {
         this.category = category;
     }
 
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+    
 }
