@@ -1,12 +1,28 @@
-import React from 'react'
 import Index from 'file?name=[name].[ext]!../index.html';
-import Bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
+import BudgetLess from '../less/budget.less';
+import BootstrapCSS from 'bootstrap/dist/css/bootstrap.min.css';
 
+import React from 'react'
+import ReactDom from 'react-dom'
+import { Router, Route, IndexRedirect, Redirect, hashHistory } from 'react-router'
+import { Provider } from 'react-redux'
 
-var Hello = React.createClass({
-    render: function () {
-        return (
-                <div></div>
-                );
-    }
-});
+import App from './react/app.jsx';
+import Home from './react/home.jsx';
+import SignIn from './react/sign-in/sign-in.jsx';
+import store from './flux/store'
+
+require('es6-promise').polyfill();
+
+ReactDom.render(
+        <Provider store={store}>
+            <Router history={hashHistory}>
+                <Route path="/" component={App}>
+                    <IndexRedirect to="home" />
+                    <Route path="home" component={Home} />
+                    <Route path="sign-in" component={SignIn} />
+                    <Redirect from="*" to="home" />
+                </Route>
+            </Router> 
+        </Provider>
+, document.getElementById('app'));

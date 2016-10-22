@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "cookie": "^0.3.1",
     "es6-promise": "^4.0.5",
     "fetch-ie8": "^1.4.3",
     "font-awesome": "^4.6.3",
