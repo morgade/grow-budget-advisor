@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Marcelo
  */
 @RestController
-public class ExampleController {
+public class BudgetController {
 //    @Autowired
 //    private CommentRepository commentRepository;
 //    

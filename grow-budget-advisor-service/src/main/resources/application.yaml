@@ -1,6 +1,6 @@
 server:
     port: 8080
-    static-content: file:../web-client/public/
+    static-content: file:../grow-budget-advisor-browser-client/public/
     
 ---
 

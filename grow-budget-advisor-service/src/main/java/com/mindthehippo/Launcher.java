@@ -18,7 +18,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 /**
  *
- * @author x4rb
  */
 @SpringBootApplication
 public class Launcher extends WebMvcConfigurerAdapter {
