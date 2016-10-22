@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect, dispatch } from 'react-redux'
 
-import ListGroup from 'react-bootstrap/lib/ListGroup';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
 
 class Goals extends React.Component {
+    
     
     render() {
         return (
