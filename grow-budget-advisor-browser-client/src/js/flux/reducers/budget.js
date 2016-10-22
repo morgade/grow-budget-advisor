@@ -10,7 +10,9 @@ const initialState =  {
     authenticationFeedback: null,
     user: null,
     account: null,
-    pendingFetch: true
+    pendingFetch: true,
+    items: [ { id:'1', category: 'PAYCHECK', amount: 100, label: 'Weekly payment' }, { id:'2', category: 'PAYCHECK', amount: 100, label: 'Weekly payment' } ],
+    goals: [ { id:'1', text: 'TV', amount: 300}, { id:'2', text: 'Bike', amount: 100 } ]
 };
 
 /**

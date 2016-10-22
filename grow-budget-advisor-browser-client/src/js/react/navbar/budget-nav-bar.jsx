@@ -19,18 +19,26 @@ class TitleBar extends React.Component {
             <Navbar fixedTop fluid>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a className="navbar-brand" href="#/">Budget Advisor {this.props.route.current}</a>
+                        <a className="navbar-brand" href="#/">Budget Advisor</a>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
                 <Navbar.Collapse>
-                    <Nav>
                         {this.props.budget.user ? 
-                            <NavItem className={this.props.route.current==='/budget'?'active':null}>My Budget</NavItem> 
+                            <Nav>
+                                <NavItem onClick={()=>this.routeChange('/budget')} className={this.props.route.current==='/budget'?'active':null}>
+                                    My Budget
+                                </NavItem> 
+                                <NavItem onClick={()=>this.routeChange('/goals')} className={this.props.route.current==='/goals'?'active':null}>
+                                    My Goals
+                                </NavItem> 
+                                <NavItem onClick={()=>this.routeChange('/graphs')} className={this.props.route.current==='/graphs'?'active':null}>
+                                    Graphs'n Tips
+                                </NavItem> 
+                            </Nav>
                             : 
                             null
                         }
-                    </Nav>
                     <Nav pullRight>
                         {this.props.budget.user ?
                             <NavItem>Hello, {this.props.budget.user} !</NavItem>
