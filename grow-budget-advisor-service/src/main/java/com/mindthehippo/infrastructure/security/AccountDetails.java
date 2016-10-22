@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 /**
- * 
+ * Inject Account information Security Principal
  * mockAccount must be replaced by a service 
  * to recover user account.
  *

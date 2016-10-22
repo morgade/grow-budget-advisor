@@ -9,6 +9,7 @@ import com.mindthehippo.budget.aggregate.budget.Budget;
 import com.mindthehippo.budget.aggregate.budget.BudgetRepository;
 import com.mindthehippo.budget.aggregate.budget.Item;
 import com.mindthehippo.budget.aggregate.goal.Goal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.stereotype.Component;
@@ -20,16 +21,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class BudgetInMemoryRepository implements BudgetRepository {
 
-    List<Budget> budgets;
+    List<Budget> budgets = new ArrayList<>();
 
     @Override
     public List<Item> getItens(UUID account) {
-        for (Budget budget : budgets) {
-            if (budget.getAccount().equals(account)) {
-                return budget.getItems();
-            }
-        }
-        return null;
+        return budgets.stream()
+                .filter(b -> b.getAccount().equals(account))
+                .findFirst().get().getItems();
     }
 
     @Override
@@ -39,7 +37,14 @@ public class BudgetInMemoryRepository implements BudgetRepository {
 
     @Override
     public void armazenar(Budget budget) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        budgets.add(budget);
+    }
+
+    @Override
+    public Budget get(UUID account) {
+        return budgets.stream().
+                filter(b -> b.getAccount().equals(account)).
+                findFirst().get();
     }
 
 }

@@ -5,7 +5,9 @@
  */
 package com.mindthehippo.budget.core;
 
+import com.mindthehippo.account.Account;
 import com.mindthehippo.budget.aggregate.budget.BudgetRepository;
+import com.mindthehippo.budget.aggregate.budget.Item;
 import com.mindthehippo.budget.application.BudgetApplicationService;
 import com.mindthehippo.budget.application.dto.GoalDTO;
 import com.mindthehippo.budget.application.dto.ItemDTO;
@@ -14,6 +16,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -25,9 +28,15 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
 
     @Autowired
     BudgetRepository budgetRepository;
-            
+
     @Autowired
     ModelMapper modelMapper;
+
+    @Override
+    public void armazenar(ItemDTO itemDTO) {
+        Account account = (Account) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+    }
 
     @Override
     public List<ItemDTO> getItens(UUID account) {
