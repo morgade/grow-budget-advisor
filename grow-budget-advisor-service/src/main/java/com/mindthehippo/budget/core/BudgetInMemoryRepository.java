@@ -2,8 +2,10 @@ package com.mindthehippo.budget.core;
 
 import com.mindthehippo.budget.aggregate.budget.Budget;
 import com.mindthehippo.budget.aggregate.budget.BudgetRepository;
+import com.mindthehippo.budget.aggregate.budget.Category;
 import com.mindthehippo.budget.aggregate.budget.Item;
 import com.mindthehippo.budget.aggregate.goal.Goal;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +24,16 @@ public class BudgetInMemoryRepository implements BudgetRepository {
     @Override
     public List<Item> getItens(UUID account) {
         return budgets.get(account).getItems();
+    }
+
+    @Override
+    public List<Category> getItemCategories() {
+        return Arrays.asList(new Category(UUID.randomUUID(), "UTILITIES"),
+                new Category(UUID.randomUUID(), "PAYCHECK"),
+                new Category(UUID.randomUUID(), "TAXES"),
+                new Category(UUID.randomUUID(), "CREDIT CARD"),
+                new Category(UUID.randomUUID(), "LOAN PAY")
+        );
     }
 
     @Override

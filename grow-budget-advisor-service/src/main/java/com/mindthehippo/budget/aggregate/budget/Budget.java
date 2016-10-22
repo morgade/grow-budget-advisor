@@ -12,9 +12,9 @@ public class Budget {
     private UUID account;
     private final List<Item> items;
 
-    public Budget() {
+    public Budget(UUID account) {
+        this.account = account;
         items = new ArrayList<>();
-
     }
 
     public Budget(UUID account, List<Item> items) {
