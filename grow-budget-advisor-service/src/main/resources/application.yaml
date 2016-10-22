@@ -1,3 +1,6 @@
+mock:
+    account: 7b68f7e8-2ea6-4bfb-8be5-1ab3037de14f
+
 server:
     port: 8080
     static-content: file:../grow-budget-advisor-browser-client/public/
