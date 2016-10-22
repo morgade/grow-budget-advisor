@@ -1,5 +1,13 @@
 package com.mindthehippo.budget.interfaces;
 
+import com.mindthehippo.budget.application.BudgetApplicationService;
+import com.mindthehippo.budget.application.dto.Goal;
+import com.mindthehippo.budget.application.dto.Item;
+import java.util.List;
+import java.util.UUID;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -8,38 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class BudgetController {
-//    @Autowired
-//    private CommentRepository commentRepository;
-//    
-//    @RequestMapping("/heap")
-//    public Map heap() {
-//        return new HashMap() {{
-//            put("max", Runtime.getRuntime().maxMemory());
-//            put("free", Runtime.getRuntime().freeMemory());
-//        }};
-//    }
-//    
-//    @RequestMapping(value = "/comment", method = RequestMethod.POST)
-//    public void postComment(@RequestBody Comment comment) throws InterruptedException {
-//        Thread.sleep(1000);
-//        commentRepository.save(comment);
-//    }
-//    
-//    @RequestMapping(value = "/comment/{id}", method = RequestMethod.DELETE)
-//    public void delete(@PathVariable("id") String commentId) throws InterruptedException {
-//        Thread.sleep(1000);
-//        commentRepository.remove(commentId);
-//    }
-//    
-//    @RequestMapping(value = "/comment/{id}", method = RequestMethod.GET)
-//    public Comment get(@PathVariable("id") String commentId) throws InterruptedException {
-//        Thread.sleep(1000);
-//        return commentRepository.get(commentId);
-//    }
-//    
-//    @RequestMapping(value = "/comment", method = RequestMethod.GET)
-//    public Iterable<Comment> getComments() throws InterruptedException {
-//        Thread.sleep(1000);
-//        return commentRepository.findAll();
-//    }
+
+    @Autowired
+    private BudgetApplicationService budgetAppService;
+
+    @RequestMapping(path = "/budget/{accountId}/item")
+    public List<Item> getItens(@PathVariable("accountId") UUID accountId) {
+        return budgetAppService.getItens(accountId);
+    }
+
+    @RequestMapping(path = "/budget/{accountId}/goal")
+    public List<Goal> getGoals(@PathVariable("accountId") UUID accountId) {
+        return budgetAppService.getGoals(accountId);
+    }
+
 }

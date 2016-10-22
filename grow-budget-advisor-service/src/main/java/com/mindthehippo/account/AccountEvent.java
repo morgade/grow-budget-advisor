@@ -7,20 +7,20 @@ import java.util.UUID;
  *
  */
 public class AccountEvent {
-    private final UUID id;
+    private final UUID accountId;
     private final EventType type;
     private final String description;
     private final float ammount;
 
-    public AccountEvent(UUID id, EventType type, String description, float ammount) {
-        this.id = id;
+    public AccountEvent(UUID accountId, EventType type, String description, float ammount) {
+        this.accountId = accountId;
         this.type = type;
         this.description = description;
         this.ammount = ammount;
     }
 
-    public UUID getId() {
-        return id;
+    public UUID getAccountId() {
+        return accountId;
     }
 
     public EventType getType() {
