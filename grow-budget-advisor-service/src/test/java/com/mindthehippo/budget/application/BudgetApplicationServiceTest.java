@@ -55,7 +55,7 @@ public class BudgetApplicationServiceTest {
         Mockito.when(budgetRepository.get(Matchers.any(UUID.class))).
                 thenReturn(new Budget(uuid, Arrays.asList(new Item(UUID.randomUUID(), "Company A",
                         new Category(UUID.fromString("64f8a0bc-9c83-4d5e-b59b-18991f049e1c"),
-                                 "UTILITIES"), 1000F))));
+                                 "UTILITIES", false), 1000F))));
     }
 
     @After
@@ -71,7 +71,7 @@ public class BudgetApplicationServiceTest {
         UUID account = new UUID(10, 20);
         List<ItemDTO> items = Arrays.asList(new ItemDTO(UUID.randomUUID().toString(),
                 1000F, "Company A",
-                new Category(UUID.fromString("64f8a0bc-9c83-4d5e-b59b-18991f049e1c"), "UTILITIES")));
+                new Category(UUID.fromString("64f8a0bc-9c83-4d5e-b59b-18991f049e1c"), "UTILITIES", false)));
         BudgetDTO budgetDTO = new BudgetDTO(account.toString(), items);
         BudgetDTO expBudget = budgetApplicationService.get(account);
         assertEquals(expBudget.getAccount(), budgetDTO.getAccount());

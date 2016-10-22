@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import cookie from 'cookie';
 
 import Form from 'react-bootstrap/lib/Form';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
@@ -42,8 +41,7 @@ class SignInForm extends React.Component {
     login(evt) {
         this.props.dispatch( CommonActions.logon({
                 username: this.state.user, 
-                password: this.state.password,
-                _csrf: cookie.parse(document.cookie)['XSRF-TOKEN']
+                password: this.state.password
         }));
         evt.preventDefault();
     }
