@@ -2,30 +2,29 @@ package com.mindthehippo.budget.application.dto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  *
  */
 public class BudgetDTO {
 
-    private UUID account;
+    private String account;
     private List<ItemDTO> items;
 
     public BudgetDTO() {
         items = new ArrayList<>();
     }
 
-    public BudgetDTO(UUID account, List<ItemDTO> items) {
+    public BudgetDTO(String account, List<ItemDTO> items) {
         this.account = account;
         this.items = items;
     }
 
-    public UUID getAccount() {
+    public String getAccount() {
         return account;
     }
 
-    public void setAccount(UUID account) {
+    public void setAccount(String account) {
         this.account = account;
     }
 

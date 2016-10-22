@@ -1,6 +1,8 @@
 package com.mindthehippo.budget.aggregate.budget;
 
 import com.mindthehippo.account.AccountEvent;
+import com.mindthehippo.budget.application.dto.BudgetDTO;
+import com.mindthehippo.budget.application.dto.ItemDTO;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -14,8 +16,8 @@ public class Item {
     private final String text;
     private final Category category;
     private final float amount;
-    
-    private final Map<Integer,AccountEvent> events = new HashMap();
+
+    private final Map<Integer, AccountEvent> events = new HashMap();
 
     public Item(UUID id, String text, Category category, float amount) {
         this.id = id;
@@ -35,7 +37,7 @@ public class Item {
     public String getText() {
         return text;
     }
-    
+
     public Category getCategory() {
         return category;
     }
@@ -45,11 +47,18 @@ public class Item {
         eventsClone.putAll(events);
         return eventsClone;
     }
-    
-    public void addAccountEvent(Integer week, AccountEvent accountEvent){
-        events.put(week,accountEvent);
+
+    public void addAccountEvent(Integer week, AccountEvent accountEvent) {
+        events.put(week, accountEvent);
     }
 
-    
-    
+    public static ItemDTO convertToDTO(Item item) {
+        ItemDTO itemDTO = new ItemDTO();
+        itemDTO.setId(item.getId().toString());
+        itemDTO.setAmount(item.getAmount());
+        itemDTO.setCategory(item.getCategory());
+        itemDTO.setText(item.getText());
+        return itemDTO;
+    }
+
 }

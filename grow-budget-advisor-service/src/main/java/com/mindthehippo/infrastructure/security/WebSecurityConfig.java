@@ -1,23 +1,15 @@
 package com.mindthehippo.infrastructure.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mindthehippo.budget.aggregate.budget.Item;
-import com.mindthehippo.budget.application.dto.ItemDTO;
 import com.mindthehippo.infrastructure.mock.MockService;
 import java.io.IOException;
 import static java.util.Collections.singletonMap;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -85,19 +77,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements A
         ObjectMapper mapper = new ObjectMapper();
         response.setContentType("application/json");
         mapper.writeValue(response.getWriter(), singletonMap("failure", exception.getMessage()));
-    }
-
-    @Bean
-    public ModelMapper modelMapper() {
-        ModelMapper modelMapper = new ModelMapper();
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-        PropertyMap<Item, ItemDTO> itemMap = new PropertyMap<Item, ItemDTO>() {
-            @Override
-            protected void configure() {
-                map().setCategory(source.getCategory().getText());
-            }
-        };
-        modelMapper.addMappings(itemMap);
-        return modelMapper;
     }
 }

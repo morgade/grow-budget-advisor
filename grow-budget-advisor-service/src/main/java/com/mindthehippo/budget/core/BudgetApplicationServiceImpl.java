@@ -16,8 +16,9 @@ import com.mindthehippo.budget.application.dto.BudgetDTO;
 import com.mindthehippo.budget.application.dto.ItemDTO;
 import java.util.List;
 import java.util.UUID;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Component;
 
 /**
@@ -31,16 +32,13 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
     BudgetRepository budgetRepository;
 
     @Autowired
-    ModelMapper modelMapper;
-    
-    @Autowired
     BudgetItemAccountEventMapper budgetItemAccountEventMapper;
 
     @Override
     public void store(UUID account, ItemDTO itemDTO) {
-        Item item = new Item(UUID.fromString(itemDTO.getText()),
+        Item item = new Item(UUID.randomUUID(),
                 itemDTO.getText(),
-                new Category(UUID.fromString(itemDTO.getCategory()), itemDTO.getCategory()),
+                itemDTO.getCategory(),
                 itemDTO.getAmount());
         budgetRepository.store(account, item);
     }
@@ -51,9 +49,9 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
         if (budget == null) {
             budget = new Budget(account);
             budgetRepository.store(budget);
-            return modelMapper.map(budget, BudgetDTO.class);
+            return Budget.convertToDTO(budget);
         }
-        return modelMapper.map(budgetRepository.get(account), BudgetDTO.class);
+        return Budget.convertToDTO(budgetRepository.get(account));
     }
 
     @Override

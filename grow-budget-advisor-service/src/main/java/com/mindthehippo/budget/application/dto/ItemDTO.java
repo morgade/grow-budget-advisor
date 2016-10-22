@@ -5,23 +5,35 @@
  */
 package com.mindthehippo.budget.application.dto;
 
+import com.mindthehippo.budget.aggregate.budget.Category;
+
 /**
  *
  * @author Lucas
  */
 public class ItemDTO {
 
+    private String id;
     private float amount;
     private String text;
-    private String category;
+    private Category category;
 
     public ItemDTO() {
     }
 
-    public ItemDTO(float amount, String text, String category) {
+    public ItemDTO(String id, float amount, String text, Category category) {
+        this.id = id;
         this.amount = amount;
         this.text = text;
         this.category = category;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public float getAmount() {
@@ -32,11 +44,11 @@ public class ItemDTO {
         this.amount = amount;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
