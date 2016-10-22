@@ -7,7 +7,7 @@ class Budget extends React.Component {
 
     render() {
         return (
-            <ListGroupItem header={this.props.item.name}>
+            <ListGroupItem header={this.props.item.text}>
                 {this.props.item.category}
                 <div className="pull-right">
                     ${this.props.item.amount}
