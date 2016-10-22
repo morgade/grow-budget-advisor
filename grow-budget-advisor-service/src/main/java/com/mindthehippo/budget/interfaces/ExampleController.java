@@ -1,4 +1,4 @@
-package com.mindthehippo;
+package com.mindthehippo.budget.interfaces;
 
 import org.springframework.web.bind.annotation.RestController;
 
