@@ -98,18 +98,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements A
                 map().setCategory(source.getCategory().getText());
             }
         };
-
-        PropertyMap<Budget, BudgetDTO> budgetMap = new PropertyMap<Budget, BudgetDTO>() {
-            @Override
-            protected void configure() {
-                /*java.lang.reflect.Type targetListType = new TypeToken<List<ItemDTO>>() {
-                }.getType();
-                map(source.getItems(), targetListType);*/
-            }
-        };
-
         modelMapper.addMappings(itemMap);
-        modelMapper.addMappings(budgetMap);
         return modelMapper;
     }
 }
