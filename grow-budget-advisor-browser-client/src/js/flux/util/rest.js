@@ -26,8 +26,7 @@ class Rest {
             method: 'POST',
             credentials: 'same-origin',
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: jsonToQueryString(body)
         })
