@@ -7,12 +7,20 @@ import java.util.UUID;
  *
  */
 public class Budget {
+
     private UUID account;
-    private List<Item> items; 
+    private List<Item> items;
 
     public Budget() {
 
     }
-    
-    
+
+    public UUID getAccount() {
+        return account;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
 }

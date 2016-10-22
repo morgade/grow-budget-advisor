@@ -9,8 +9,10 @@ import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -30,34 +32,34 @@ import org.springframework.security.web.csrf.CsrfFilter;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements AuthenticationSuccessHandler, AuthenticationFailureHandler {
+
     @Value("${mock.account}")
     private String mockAccount;
-    
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
+                .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .anyRequest().permitAll()
                 .and()
-            .formLogin()
+                .formLogin()
                 .loginProcessingUrl("/login")
                 .successHandler(this)
                 .failureHandler(this)
                 .permitAll()
                 .and()
-            .logout()
+                .logout()
                 .permitAll()
                 .and()
-            .addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
-                
+                .addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
+
     }
 
-    
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
-            .inMemoryAuthentication()
+                .inMemoryAuthentication()
                 .withUser("user").password("password").roles("USER");
     }
 
@@ -76,5 +78,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements A
         ObjectMapper mapper = new ObjectMapper();
         response.setContentType("application/json");
         mapper.writeValue(response.getWriter(), singletonMap("failure", exception.getMessage()));
+    }
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 }
