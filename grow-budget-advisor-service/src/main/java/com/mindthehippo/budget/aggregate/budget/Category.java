@@ -9,14 +9,23 @@ public class Category {
 
     private UUID id;
     private String text;
+    private boolean income;
 
-    // TODO: definir mecanismo pra através da categoria, dar dicas e simular resultados. Um strategy ?
     public Category() {
     }
 
-    public Category(UUID id, String text) {
+    public Category(UUID id, String text, boolean income) {
         this.id = id;
         this.text = text;
+        this.income = income;
+    }
+
+    public boolean isIncome() {
+        return income;
+    }
+
+    public void setIncome(boolean income) {
+        this.income = income;
     }
 
     public UUID getId() {

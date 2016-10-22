@@ -7,6 +7,7 @@ import java.util.UUID;
  */
 public class Category {
     private UUID id;
+    private boolean income;
     private String text;
     
 }
