@@ -21,7 +21,7 @@ class Rest {
         .then(this.assertStatus);
     }
     
-    form(url, body) {
+    postForm(url, body) {
         return fetch(url, {
             method: 'POST',
             credentials: 'same-origin',
@@ -30,7 +30,8 @@ class Rest {
             },
             body: jsonToQueryString(body)
         })
-        .then(this.assertStatus);
+        .then(this.assertStatus)
+        .then(response => response.json());
     }
     
     get(url) {

@@ -12,6 +12,8 @@ import Col from 'react-bootstrap/lib/Col';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 
 import * as CommonActions from '../../flux/actions/common';
+import * as RouteActions from '../../flux/actions/route';
+import * as NotificationActions from '../../flux/actions/notification';
 
 class SignInForm extends React.Component {
 
@@ -26,6 +28,15 @@ class SignInForm extends React.Component {
             user: '',
             password: ''
         };
+    }
+    
+    componentWillReceiveProps(props) {
+        console.log(props.authenticationFeedback);
+        if (props.authenticationFeedback && props.authenticationFeedback.failure) {
+            this.props.dispatch(NotificationActions.notifyError(props.authenticationFeedback.failure));
+        } else if (props.authenticationFeedback && props.authenticationFeedback.authenticated) {
+            this.props.dispatch(RouteActions.routeChange('/home'));
+        }
     }
     
     login() {
@@ -64,4 +75,6 @@ class SignInForm extends React.Component {
     }
 };
 
-export default connect()(SignInForm);
+export default connect( state => ({ 
+        authenticationFeedback: state.budget.authenticationFeedback
+    }))(SignInForm);

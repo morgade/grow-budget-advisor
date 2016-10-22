@@ -2,6 +2,7 @@ import objectAssign from 'object-assign';
 
 import { reducer } from '../util/creators'
 import * as CommonActions from '../actions/common'
+import * as NotificationActions from '../actions/notification'
 
 
 /**
@@ -17,6 +18,12 @@ export default reducer(initialState, {
     [CommonActions.SERVICE_FAILURE]: (state, action) => 
         objectAssign({}, state, {
             message: action.error.message,
+            level: 'error'
+        }),
+    
+    [NotificationActions.NOTIFY_ERROR]: (state, action) => 
+        objectAssign({}, state, {
+            message: action.message,
             level: 'error'
         })
     

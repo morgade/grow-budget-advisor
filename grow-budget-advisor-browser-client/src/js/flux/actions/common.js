@@ -12,7 +12,7 @@ export const SERVICE_FAILURE = 'SERVICE_FAILURE';
 export const serviceFailure = sync(SERVICE_FAILURE, 'error');
 
 
-export const logonRequest = sync(LOGON_REQUEST, 'user');
-export const logonResponse = sync(LOGON_SUCCESS);
+export const logonRequest = sync(LOGON_REQUEST, 'credentials');
+export const logonResponse = sync(LOGON_SUCCESS, 'feedback');
 
-export const logon = async(args => rest.form('/login', args[0]), logonRequest, logonResponse, serviceFailure); 
+export const logon = async(args => rest.postForm('/login', args[0]), logonRequest, logonResponse, serviceFailure); 
