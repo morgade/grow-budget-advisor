@@ -42,13 +42,13 @@ class Goals extends React.Component {
                     
                     <Modal show={this.state.showItemModal} onHide={this.close}>
                         <Modal.Header>
-                          <Modal.Title>Add Buget Item</Modal.Title>
+                          <Modal.Title>Add a New Goal</Modal.Title>
                         </Modal.Header>
                     <Modal.Body>
-                      <SignInForm />
+                      <ItemForm />
                     </Modal.Body>
                     <Modal.Footer>
-                      <ItemForm onClick={(evt)=>this.close()}>Close</ItemForm>
+                      <Button onClick={(evt)=>this.close()}>Close</Button>
                     </Modal.Footer>
                   </Modal>
                 </div>

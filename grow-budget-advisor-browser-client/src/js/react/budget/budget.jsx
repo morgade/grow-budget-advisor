@@ -7,6 +7,7 @@ import PageHeader from 'react-bootstrap/lib/PageHeader';
 import Button from 'react-bootstrap/lib/Button';
 import Modal from 'react-bootstrap/lib/Modal';
 import Item from './item.jsx';
+import ItemForm from './item-form.jsx';
 import * as BudgetActions from '../../flux/actions/budget';
 
 class Budget extends React.Component {
@@ -40,7 +41,7 @@ class Budget extends React.Component {
         return (
                 <div>
                     <PageHeader>
-                        <Button bsStyle="primary" className="pull-right">ADD ITEM</Button>
+                        <Button bsStyle="primary" className="pull-right" onClick={(evt)=>this.open()}>ADD GOAL</Button>
                         My planned budget
                     </PageHeader>
                         
@@ -53,6 +54,7 @@ class Budget extends React.Component {
                           <Modal.Title>Add Buget Item</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
+                            <ItemForm />
                         </Modal.Body>
                         <Modal.Footer>
                           <Button onClick={(evt)=>this.close()}>Close</Button>
