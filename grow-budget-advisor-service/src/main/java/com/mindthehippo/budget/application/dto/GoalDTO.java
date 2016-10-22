@@ -9,16 +9,34 @@ package com.mindthehippo.budget.application.dto;
  *
  * @author Lucas
  */
-public class Item {
+public class GoalDTO {
 
-    private float amount;
+    private String text;
     private String category;
+    private float amount;
 
-    public Item() {
+    public GoalDTO() {
     }
 
-    public Item(float amount, String category) {
+    public GoalDTO(String text, String category, float amount) {
+        this.text = text;
+        this.category = category;
         this.amount = amount;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
         this.category = category;
     }
 
@@ -28,14 +46,6 @@ public class Item {
 
     public void setAmount(float amount) {
         this.amount = amount;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
 }

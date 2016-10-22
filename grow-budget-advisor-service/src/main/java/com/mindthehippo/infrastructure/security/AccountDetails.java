@@ -14,6 +14,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 /**
+ * 
+ * mockAccount must be replaced by a service 
+ * to recover user account.
  *
  * @author Novaes
  */
@@ -25,7 +28,7 @@ public class AccountDetails implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        //loadAccountFromUser();
+        //service.loadAccountFromUser(username);
         return new Account(UUID.fromString(mockAccount));
     }
 
