@@ -57,12 +57,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements A
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         ObjectMapper mapper = new ObjectMapper();
+        response.setContentType("application/json");
         mapper.writeValue(response.getWriter(), singletonMap("authenticated", authentication.getName()));
     }
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         ObjectMapper mapper = new ObjectMapper();
+        response.setContentType("application/json");
         mapper.writeValue(response.getWriter(), singletonMap("failure", exception.getMessage()));
     }
 }
