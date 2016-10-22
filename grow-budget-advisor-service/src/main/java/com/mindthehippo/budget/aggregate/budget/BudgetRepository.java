@@ -10,7 +10,9 @@ import java.util.UUID;
  */
 public interface BudgetRepository {
     
-    void armazenar(Budget budget);
+    void store(Budget budget);
+    
+    void store(UUID account, Item item);
     
     Budget get(UUID account);
 

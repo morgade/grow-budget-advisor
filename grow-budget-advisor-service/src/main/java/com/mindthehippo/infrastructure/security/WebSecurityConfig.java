@@ -1,11 +1,14 @@
 package com.mindthehippo.infrastructure.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mindthehippo.budget.aggregate.budget.Budget;
 import com.mindthehippo.budget.aggregate.budget.Item;
+import com.mindthehippo.budget.application.dto.BudgetDTO;
 import com.mindthehippo.budget.application.dto.ItemDTO;
 import java.io.IOException;
 import static java.util.Collections.singletonMap;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import javax.servlet.ServletException;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
+import org.modelmapper.TypeToken;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -94,7 +98,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements A
                 map().setCategory(source.getCategory().getText());
             }
         };
+
+        PropertyMap<Budget, BudgetDTO> budgetMap = new PropertyMap<Budget, BudgetDTO>() {
+            @Override
+            protected void configure() {
+                /*java.lang.reflect.Type targetListType = new TypeToken<List<ItemDTO>>() {
+                }.getType();
+                map(source.getItems(), targetListType);*/
+            }
+        };
+
         modelMapper.addMappings(itemMap);
+        modelMapper.addMappings(budgetMap);
         return modelMapper;
     }
 }

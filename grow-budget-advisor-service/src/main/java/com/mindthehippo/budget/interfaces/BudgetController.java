@@ -1,14 +1,11 @@
 package com.mindthehippo.budget.interfaces;
 
 import com.mindthehippo.budget.application.BudgetApplicationService;
-import com.mindthehippo.budget.application.dto.GoalDTO;
-import com.mindthehippo.budget.application.dto.ItemDTO;
-import java.util.List;
+import com.mindthehippo.budget.application.dto.BudgetDTO;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
@@ -20,14 +17,8 @@ public class BudgetController {
     @Autowired
     private BudgetApplicationService budgetAppService;
 
-    @RequestMapping(path = "/budget/{accountId}/item")
-    public List<ItemDTO> getItens(@PathVariable("accountId") UUID accountId) {
-        return budgetAppService.getItens(accountId);
+    @RequestMapping(path = "/budget/{accountId}")
+    public BudgetDTO getItens(@PathVariable("accountId") UUID accountId) {
+        return budgetAppService.get(accountId);
     }
-
-    @RequestMapping(path = "/budget/{accountId}/goal")
-    public List<GoalDTO> getGoals(@PathVariable("accountId") UUID accountId) {
-        return budgetAppService.getGoals(accountId);
-    }
-
 }

@@ -5,10 +5,12 @@
  */
 package com.mindthehippo.budget.core;
 
-import com.mindthehippo.account.Account;
+import com.mindthehippo.budget.aggregate.budget.Budget;
 import com.mindthehippo.budget.aggregate.budget.BudgetRepository;
+import com.mindthehippo.budget.aggregate.budget.Category;
 import com.mindthehippo.budget.aggregate.budget.Item;
 import com.mindthehippo.budget.application.BudgetApplicationService;
+import com.mindthehippo.budget.application.dto.BudgetDTO;
 import com.mindthehippo.budget.application.dto.GoalDTO;
 import com.mindthehippo.budget.application.dto.ItemDTO;
 import java.util.List;
@@ -16,7 +18,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -33,19 +34,16 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
     ModelMapper modelMapper;
 
     @Override
-    public void armazenar(ItemDTO itemDTO) {
-        Account account = (Account) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
+    public void store(UUID account, ItemDTO itemDTO) {
+        Item item = new Item(UUID.fromString(itemDTO.getText()),
+                itemDTO.getText(),
+                new Category(UUID.fromString(itemDTO.getCategory()), itemDTO.getCategory()),
+                itemDTO.getAmount());
+        budgetRepository.store(account, item);
     }
 
     @Override
-    public List<ItemDTO> getItens(UUID account) {
-        return budgetRepository.getItens(account).stream().map(item -> modelMapper.map(item, ItemDTO.class)).collect(Collectors.toList());
+    public BudgetDTO get(UUID account) {
+        return modelMapper.map(budgetRepository.get(account), BudgetDTO.class);
     }
-
-    @Override
-    public List<GoalDTO> getGoals(UUID budget) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

@@ -5,10 +5,11 @@
  */
 package com.mindthehippo.budget.application;
 
+import com.mindthehippo.budget.aggregate.budget.Budget;
 import com.mindthehippo.budget.aggregate.budget.BudgetRepository;
 import com.mindthehippo.budget.aggregate.budget.Category;
 import com.mindthehippo.budget.aggregate.budget.Item;
-import com.mindthehippo.budget.application.dto.GoalDTO;
+import com.mindthehippo.budget.application.dto.BudgetDTO;
 import com.mindthehippo.budget.application.dto.ItemDTO;
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +20,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,9 +56,10 @@ public class BudgetApplicationServiceTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        Mockito.when(budgetRepository.getItens(new UUID(10, 20))).
-                thenReturn(Arrays.asList(new Item(new UUID(1, 2), "Company A",
-                        new Category(new UUID(1, 2), "Salary"), 1000F)));
+        UUID uuid = new UUID(10, 20);
+        Mockito.when(budgetRepository.get(Matchers.any(UUID.class))).
+                thenReturn(new Budget(uuid, Arrays.asList(new Item(UUID.randomUUID(), "Company A",
+                        new Category(UUID.randomUUID(), "Salary"), 1000F))));
     }
 
     @After
@@ -69,25 +72,13 @@ public class BudgetApplicationServiceTest {
     @org.junit.Test
     public void testGetItens() {
         System.out.println("getItens");
-        UUID budget = new UUID(10, 20);
-        List<ItemDTO> expResult = Arrays.asList(new ItemDTO(1000F, "Salary"));
-        List<ItemDTO> result = budgetApplicationService.getItens(budget);
-        assertEquals(expResult.get(0).getAmount(), result.get(0).getAmount(), 0);
-        assertEquals(expResult.get(0).getCategory(), result.get(0).getCategory());
-        
-    }
+        UUID account = new UUID(10, 20);
+        List<ItemDTO> items = Arrays.asList(new ItemDTO(1000F, "Company A", "Salary"));
+        BudgetDTO budgetDTO = new BudgetDTO(account, items);
+        BudgetDTO expBudget = budgetApplicationService.get(account);
+        assertEquals(expBudget.getAccount(), budgetDTO.getAccount());
+        assertEquals(expBudget.getItems().get(0).getText(), budgetDTO.getItems().get(0).getText());
+        assertEquals(expBudget.getItems().get(0).getCategory(), budgetDTO.getItems().get(0).getCategory());
 
-    /**
-     * Test of getGoals method, of class BudgetApplicationService.
-     */
-    @org.junit.Test
-    public void testGetGoals() {
-        System.out.println("getGoals");
-        UUID budget = null;
-        List<GoalDTO> expResult = null;
-        List<GoalDTO> result = budgetApplicationService.getGoals(budget);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 }

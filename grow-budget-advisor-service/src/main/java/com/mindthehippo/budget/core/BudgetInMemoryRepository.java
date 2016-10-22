@@ -30,8 +30,13 @@ public class BudgetInMemoryRepository implements BudgetRepository {
     }
 
     @Override
-    public void armazenar(Budget budget) {
+    public void store(Budget budget) {
         budgets.put(budget.getAccount(), budget);
+    }
+
+    @Override
+    public void store(UUID account, Item item) {
+        budgets.get(account).getItems().add(item);
     }
 
     @Override
