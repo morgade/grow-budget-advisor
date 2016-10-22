@@ -1,18 +1,25 @@
 import React from 'react';
 import { connect, dispatch } from 'react-redux'
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
+
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import ListGroup from 'react-bootstrap/lib/ListGroup';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
+import Item from './item.jsx';
 
 class Budget extends React.Component {
-
+    
     render() {
+        const items = this.props.budget.items.map( (item) => 
+                <Item key={item.id} item={item} /> 
+            );
+        
         return (
                 <div>
                     <PageHeader>My planned budget</PageHeader>
-                    <Col md={12}>
-                        My planned budget
-                    </Col>
+                        <ListGroup>
+                            {items}
+                        </ListGroup>
+                    
                 </div>
         );
     }
