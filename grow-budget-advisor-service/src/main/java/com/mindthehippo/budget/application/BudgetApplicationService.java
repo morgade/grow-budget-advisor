@@ -20,4 +20,6 @@ public interface BudgetApplicationService {
     public List<ItemDTO> getItens(UUID budget);
     
     public List<GoalDTO> getGoals(UUID budget);
+
+    void armazenar(ItemDTO itemDTO);
 }

@@ -11,6 +11,8 @@ import java.util.UUID;
 public interface BudgetRepository {
     
     void armazenar(Budget budget);
+    
+    Budget get(UUID account);
 
     List<Goal> getGoals(UUID account);
 

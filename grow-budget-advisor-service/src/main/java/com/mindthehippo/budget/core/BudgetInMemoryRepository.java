@@ -31,7 +31,12 @@ public class BudgetInMemoryRepository implements BudgetRepository {
 
     @Override
     public void armazenar(Budget budget) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        budgets.put(budget.getAccount(), budget);
+    }
+
+    @Override
+    public Budget get(UUID account) {
+        return budgets.get(account);
     }
 
 }

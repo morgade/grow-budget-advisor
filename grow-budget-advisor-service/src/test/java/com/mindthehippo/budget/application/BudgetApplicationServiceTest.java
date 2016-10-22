@@ -55,7 +55,7 @@ public class BudgetApplicationServiceTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         Mockito.when(budgetRepository.getItens(new UUID(10, 20))).
-                thenReturn(Arrays.asList(new Item(new UUID(1, 2),
+                thenReturn(Arrays.asList(new Item(new UUID(1, 2), "Company A",
                         new Category(new UUID(1, 2), "Salary"), 1000F)));
     }
 

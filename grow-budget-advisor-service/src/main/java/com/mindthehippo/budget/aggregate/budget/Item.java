@@ -8,11 +8,13 @@ import java.util.UUID;
 public class Item {
 
     private final UUID id;
+    private final String text;
     private final Category category;
     private final float amount;
 
-    public Item(UUID id, Category category, float amount) {
+    public Item(UUID id, String text, Category category, float amount) {
         this.id = id;
+        this.text = text;
         this.category = category;
         this.amount = amount;
     }
@@ -25,6 +27,10 @@ public class Item {
         return amount;
     }
 
+    public String getText() {
+        return text;
+    }
+    
     public Category getCategory() {
         return category;
     }
