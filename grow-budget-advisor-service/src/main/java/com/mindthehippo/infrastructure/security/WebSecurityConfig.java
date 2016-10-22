@@ -1,6 +1,8 @@
 package com.mindthehippo.infrastructure.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mindthehippo.budget.aggregate.budget.Item;
+import com.mindthehippo.budget.application.dto.ItemDTO;
 import java.io.IOException;
 import static java.util.Collections.singletonMap;
 import java.util.HashMap;
@@ -10,6 +12,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -82,6 +86,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements A
 
     @Bean
     public ModelMapper modelMapper() {
-        return new ModelMapper();
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+        PropertyMap<Item, ItemDTO> itemMap = new PropertyMap<Item, ItemDTO>() {
+            @Override
+            protected void configure() {
+                map().setCategory(source.getCategory().getText());
+            }
+        };
+        modelMapper.addMappings(itemMap);
+        return modelMapper;
     }
 }
