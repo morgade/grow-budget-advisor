@@ -1,5 +1,7 @@
 mock:
-    account: 7b68f7e8-2ea6-4bfb-8be5-1ab3037de14f
+    account: 
+        empty: 7b68f7e8-2ea6-4bfb-8be5-1ab3037de14f
+        full:  7f713be0-b7ed-4aba-b69c-972ee3203253
 
 server:
     port: 8080

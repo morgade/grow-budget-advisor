@@ -1,14 +1,12 @@
 package com.mindthehippo.infrastructure.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mindthehippo.budget.aggregate.budget.Budget;
 import com.mindthehippo.budget.aggregate.budget.Item;
-import com.mindthehippo.budget.application.dto.BudgetDTO;
 import com.mindthehippo.budget.application.dto.ItemDTO;
+import com.mindthehippo.infrastructure.mock.MockService;
 import java.io.IOException;
 import static java.util.Collections.singletonMap;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import javax.servlet.ServletException;
@@ -16,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
-import org.modelmapper.TypeToken;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,8 +38,8 @@ import org.springframework.security.web.csrf.CsrfFilter;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements AuthenticationSuccessHandler, AuthenticationFailureHandler {
 
-    @Value("${mock.account}")
-    private String mockAccount;
+    @Autowired
+    MockService mockService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -69,6 +66,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements A
         auth
                 .inMemoryAuthentication()
                 .withUser("user").password("password").roles("USER");
+
+        auth.inMemoryAuthentication().withUser("dennis").password("grow").roles("USER");
     }
 
     @Override
@@ -77,7 +76,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements A
         response.setContentType("application/json");
         Map m = new HashMap();
         m.put("user", authentication.getName());
-        m.put("account", UUID.fromString(mockAccount));
+        m.put("account", mockService.getAccount(authentication.getName()));
         mapper.writeValue(response.getWriter(), singletonMap("authenticated", m));
     }
 
