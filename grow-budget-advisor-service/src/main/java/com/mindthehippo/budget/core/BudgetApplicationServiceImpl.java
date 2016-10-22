@@ -5,17 +5,17 @@
  */
 package com.mindthehippo.budget.core;
 
+import com.mindthehippo.account.AccountEvent;
 import com.mindthehippo.budget.aggregate.budget.Budget;
 import com.mindthehippo.budget.aggregate.budget.BudgetRepository;
 import com.mindthehippo.budget.aggregate.budget.Category;
 import com.mindthehippo.budget.aggregate.budget.Item;
 import com.mindthehippo.budget.application.BudgetApplicationService;
+import com.mindthehippo.budget.application.BudgetItemAccountEventMapper;
 import com.mindthehippo.budget.application.dto.BudgetDTO;
-import com.mindthehippo.budget.application.dto.GoalDTO;
 import com.mindthehippo.budget.application.dto.ItemDTO;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,6 +32,9 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
 
     @Autowired
     ModelMapper modelMapper;
+    
+    @Autowired
+    BudgetItemAccountEventMapper budgetItemAccountEventMapper;
 
     @Override
     public void store(UUID account, ItemDTO itemDTO) {
@@ -46,7 +49,8 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
     public BudgetDTO get(UUID account) {
         Budget budget = budgetRepository.get(account);
         if (budget == null) {
-            budgetRepository.store(new Budget(account));
+            budget = new Budget(account);
+            budgetRepository.store(budget);
             return modelMapper.map(budget, BudgetDTO.class);
         }
         return modelMapper.map(budgetRepository.get(account), BudgetDTO.class);
@@ -55,5 +59,12 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
     @Override
     public List<Category> getItemCagories() {
         return budgetRepository.getItemCategories();
+    }
+
+    @Override
+    public void processAccountEvent(AccountEvent accountEvent) {
+        
+        Item item = budgetItemAccountEventMapper.map(accountEvent);
+        item.addAccountEvent(accountEvent.getWeek(), accountEvent);
     }
 }

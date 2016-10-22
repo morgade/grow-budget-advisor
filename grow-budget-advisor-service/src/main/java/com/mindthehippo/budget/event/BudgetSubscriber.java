@@ -25,13 +25,7 @@ public class BudgetSubscriber implements Consumer<AccountEvent> {
     
     @Override
     public void accept(AccountEvent event) {
-        //DO some intelligence
-        if(event.getType().equals(EventType.CREDIT)){
-            System.out.println("MAKING MONEY");
-        }else{
-            System.out.println("WASTING MONEY");
-            
-        }
+        budgetAppService.processAccountEvent(event);
     }
     
 }

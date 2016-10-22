@@ -1,5 +1,8 @@
 package com.mindthehippo.budget.aggregate.budget;
 
+import com.mindthehippo.account.AccountEvent;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -11,6 +14,8 @@ public class Item {
     private final String text;
     private final Category category;
     private final float amount;
+    
+    private final Map<Integer,AccountEvent> events = new HashMap();
 
     public Item(UUID id, String text, Category category, float amount) {
         this.id = id;
@@ -35,4 +40,16 @@ public class Item {
         return category;
     }
 
+    public Map<Integer, AccountEvent> getEvents() {
+        Map<Integer, AccountEvent> eventsClone = new HashMap();
+        eventsClone.putAll(events);
+        return eventsClone;
+    }
+    
+    public void addAccountEvent(Integer week, AccountEvent accountEvent){
+        events.put(week,accountEvent);
+    }
+
+    
+    
 }

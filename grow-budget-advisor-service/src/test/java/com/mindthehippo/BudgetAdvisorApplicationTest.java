@@ -23,10 +23,10 @@ public class BudgetAdvisorApplicationTest {
     
     @Test
     public void contextLoads() {
-        AccountEvent e1 = new AccountEvent(UUID.fromString("7b68f7e8-2ea6-4bfb-8be5-1ab3037de14f"), EventType.DEBIT, "teste1", 126510.12f);
-        AccountEvent e2 = new AccountEvent(UUID.fromString("7b68f7e8-2ea6-4bfb-8be5-1ab3037de14f"), EventType.CREDIT, "teste2", 121210.12f);
-        AccountEvent e3 = new AccountEvent(UUID.fromString("7b68f7e8-2ea6-4bfb-8be5-1ab3037de14f"), EventType.DEBIT, "teste3", 121650.12f);
-        AccountEvent e4 = new AccountEvent(UUID.fromString("7b68f7e8-2ea6-4bfb-8be5-1ab3037de14f"), EventType.CREDIT, "teste4", 121210.12f);
+        AccountEvent e1 = new AccountEvent(UUID.fromString("7b68f7e8-2ea6-4bfb-8be5-1ab3037de14f"), EventType.DEBIT, "teste1", 126510.12f,12);
+        AccountEvent e2 = new AccountEvent(UUID.fromString("7b68f7e8-2ea6-4bfb-8be5-1ab3037de14f"), EventType.CREDIT, "teste2", 121210.12f,13);
+        AccountEvent e3 = new AccountEvent(UUID.fromString("7b68f7e8-2ea6-4bfb-8be5-1ab3037de14f"), EventType.DEBIT, "teste3", 121650.12f,14);
+        AccountEvent e4 = new AccountEvent(UUID.fromString("7b68f7e8-2ea6-4bfb-8be5-1ab3037de14f"), EventType.CREDIT, "teste4", 121210.12f,15);
         c.put(e1);
         c.put(e2);
         c.put(e3);

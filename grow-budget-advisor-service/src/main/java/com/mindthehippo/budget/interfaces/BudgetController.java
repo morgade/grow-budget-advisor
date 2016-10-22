@@ -22,7 +22,7 @@ public class BudgetController {
     private BudgetApplicationService budgetAppService;
 
     @RequestMapping(path = "/budget/{accountId}")
-    public BudgetDTO getBudget(@PathVariable("accountId") UUID accountId) {
+    public BudgetDTO get(@PathVariable("accountId") UUID accountId) {
         return budgetAppService.get(accountId);
     }
 

@@ -49,12 +49,13 @@ class Budget extends React.Component {
                         {items}
                     </ListGroup>
                     
+                    <ItemForm  />
+                    
                     <Modal show={this.state.showItemModal} onHide={this.close}>
                         <Modal.Header>
                           <Modal.Title>Add Buget Item</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <ItemForm />
                         </Modal.Body>
                         <Modal.Footer>
                           <Button onClick={(evt)=>this.close()}>Close</Button>
