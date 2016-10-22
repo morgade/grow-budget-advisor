@@ -54,7 +54,7 @@ public class BudgetApplicationServiceTest {
         UUID uuid = new UUID(10, 20);
         Mockito.when(budgetRepository.get(Matchers.any(UUID.class))).
                 thenReturn(new Budget(uuid, Arrays.asList(new Item(UUID.randomUUID(), "Company A",
-                        new Category(UUID.randomUUID(), "Salary"), 1000F))));
+                        new Category(UUID.randomUUID(), "Salary", true), 1000F))));
     }
 
     @After

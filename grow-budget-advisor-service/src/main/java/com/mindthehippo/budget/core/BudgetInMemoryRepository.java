@@ -28,11 +28,11 @@ public class BudgetInMemoryRepository implements BudgetRepository {
 
     @Override
     public List<Category> getItemCategories() {
-        return Arrays.asList(new Category(UUID.randomUUID(), "UTILITIES"),
-                new Category(UUID.randomUUID(), "PAYCHECK"),
-                new Category(UUID.randomUUID(), "TAXES"),
-                new Category(UUID.randomUUID(), "CREDIT CARD"),
-                new Category(UUID.randomUUID(), "LOAN PAY")
+        return Arrays.asList(new Category(UUID.randomUUID(), "UTILITIES", true),
+                new Category(UUID.randomUUID(), "PAYCHECK", false),
+                new Category(UUID.randomUUID(), "TAXES", false),
+                new Category(UUID.randomUUID(), "CREDIT CARD", false),
+                new Category(UUID.randomUUID(), "LOAN PAY", false)
         );
     }
 
