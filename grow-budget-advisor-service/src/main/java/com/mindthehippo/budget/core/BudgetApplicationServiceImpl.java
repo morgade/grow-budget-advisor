@@ -44,6 +44,16 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
 
     @Override
     public BudgetDTO get(UUID account) {
+        Budget budget = budgetRepository.get(account);
+        if (budget == null) {
+            budgetRepository.store(new Budget(account));
+            return modelMapper.map(budget, BudgetDTO.class);
+        }
         return modelMapper.map(budgetRepository.get(account), BudgetDTO.class);
+    }
+
+    @Override
+    public List<Category> getItemCagories() {
+        return budgetRepository.getItemCategories();
     }
 }
