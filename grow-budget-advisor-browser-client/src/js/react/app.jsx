@@ -8,9 +8,9 @@ import * as RouteActions from '../flux/actions/route';
 
 class App extends React.Component {
     componentDidMount() {
-//        if (!this.props.budget.user ) {
-//            this.props.dispatch(RouteActions.routeChange('/'));
-//        }
+        if (!this.props.budget.user ) {
+            this.props.dispatch(RouteActions.routeChange('/'));
+        }
     }
     
     render() {
