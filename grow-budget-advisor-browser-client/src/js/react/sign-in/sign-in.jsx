@@ -35,16 +35,17 @@ class SignInForm extends React.Component {
         if (props.authenticationFeedback && props.authenticationFeedback.failure) {
             this.props.dispatch(NotificationActions.notifyError(props.authenticationFeedback.failure));
         } else if (props.authenticationFeedback && props.authenticationFeedback.authenticated) {
-            this.props.dispatch(RouteActions.routeChange('/home'));
+            this.props.dispatch(RouteActions.routeChange('/budget'));
         }
     }
     
-    login() {
+    login(evt) {
         this.props.dispatch( CommonActions.logon({
                 username: this.state.user, 
                 password: this.state.password,
                 _csrf: cookie.parse(document.cookie)['XSRF-TOKEN']
         }));
+        evt.preventDefault();
     }
     
     onChange(evt, field) {
@@ -55,7 +56,7 @@ class SignInForm extends React.Component {
         return (
                 <Row>
                     <Col lg={4} lgOffset={4}>
-                        <Form>
+                        <Form onSubmit={this.login}>
                             <FormGroup controlId="email">
                                 <ControlLabel>e-Mail</ControlLabel>
                                 <FormControl type="text" placeholder="Linked email account" onChange={(evt) => this.onChange(evt, 'user') } />
@@ -66,7 +67,7 @@ class SignInForm extends React.Component {
                                 <FormControl type="password" placeholder="" onChange={(evt) => this.onChange(evt, 'password') }/>
                             </FormGroup>
                             <FormGroup controlId="actions" >
-                                <Button bsStyle="primary" className="pull-right" onClick={this.login}> GET STARTED</Button>
+                                <Button type="submit" bsStyle="primary" className="pull-right"> GET STARTED</Button>
                             </FormGroup>
                         </Form>
                     </Col>

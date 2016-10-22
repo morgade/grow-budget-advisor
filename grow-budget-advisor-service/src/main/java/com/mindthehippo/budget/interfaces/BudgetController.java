@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Marcelo
  */
-@RestController
+//@RestController
 public class BudgetController {
 
     @Autowired

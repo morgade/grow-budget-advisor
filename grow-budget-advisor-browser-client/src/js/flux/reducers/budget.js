@@ -35,5 +35,5 @@ export default reducer(initialState, {
             account: action.feedback.authenticated ? action.feedback.authenticated.account : null,
             user: action.feedback.authenticated ? action.feedback.authenticated.user : null
         })
-    
+        
 });

@@ -19,11 +19,18 @@ class TitleBar extends React.Component {
             <Navbar fixedTop fluid>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a className="navbar-brand" href="#/">Budget Advisor</a>
+                        <a className="navbar-brand" href="#/">Budget Advisor {this.props.route.current}</a>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
                 <Navbar.Collapse>
+                    <Nav>
+                        {this.props.budget.user ? 
+                            <NavItem className={this.props.route.current==='/budget'?'active':null}>My Budget</NavItem> 
+                            : 
+                            null
+                        }
+                    </Nav>
                     <Nav pullRight>
                         {this.props.budget.user ?
                             <NavItem>Hello, {this.props.budget.user} !</NavItem>
@@ -38,4 +45,4 @@ class TitleBar extends React.Component {
 
 };
 
-export default connect( state => ({ budget: state.budget }))(TitleBar);
+export default connect( state => ({ budget: state.budget, route: state.route }))(TitleBar);

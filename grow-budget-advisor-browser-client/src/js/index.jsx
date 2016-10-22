@@ -10,6 +10,7 @@ import { Provider } from 'react-redux'
 import App from './react/app.jsx';
 import Home from './react/home.jsx';
 import SignIn from './react/sign-in/sign-in.jsx';
+import Budget from './react/budget/Budget.jsx';
 import store from './flux/store'
 
 require('es6-promise').polyfill();
@@ -21,6 +22,7 @@ ReactDom.render(
                     <IndexRedirect to="home" />
                     <Route path="home" component={Home} />
                     <Route path="sign-in" component={SignIn} />
+                    <Route path="budget" component={Budget} />
                     <Redirect from="*" to="home" />
                 </Route>
             </Router> 
