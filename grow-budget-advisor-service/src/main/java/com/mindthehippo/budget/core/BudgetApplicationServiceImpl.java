@@ -63,8 +63,10 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
 
     @Override
     public void processAccountEvent(AccountEvent accountEvent) {
-        
-        Item item = budgetItemAccountEventMapper.map(accountEvent);
+        System.out.println(accountEvent.getAccountId());
+        Budget b = budgetRepository.get(accountEvent.getAccountId());
+        System.out.println(b);
+        Item item = budgetItemAccountEventMapper.map(b, accountEvent);
         item.addAccountEvent(accountEvent.getWeek(), accountEvent);
     }
 }
