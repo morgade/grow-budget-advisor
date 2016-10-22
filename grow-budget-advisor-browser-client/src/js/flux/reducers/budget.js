@@ -8,6 +8,7 @@ import * as CommonActions from '../actions/common'
  */
 const initialState =  {
     authenticationFeedback: null,
+    user: null,
     account: null,
     pendingFetch: true
 };
@@ -31,7 +32,8 @@ export default reducer(initialState, {
         objectAssign({}, state, { 
             pendingFetch: false,
             authenticationFeedback: action.feedback,
-            account: action.feedback.account ? action.feedback.account : null
+            account: action.feedback.authenticated ? action.feedback.authenticated.account : null,
+            user: action.feedback.authenticated ? action.feedback.authenticated.user : null
         })
     
 });

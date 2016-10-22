@@ -66,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements A
         ObjectMapper mapper = new ObjectMapper();
         response.setContentType("application/json");
         Map m = new HashMap();
-        m.put("authenticated", authentication.getName());
+        m.put("user", authentication.getName());
         m.put("account", UUID.fromString(mockAccount));
         mapper.writeValue(response.getWriter(), singletonMap("authenticated", m));
     }

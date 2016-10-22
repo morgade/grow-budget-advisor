@@ -25,15 +25,17 @@ class TitleBar extends React.Component {
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav pullRight>
-                        <NavItem eventKey={1} onClick={this.routeChange}>Link</NavItem>
-                        <NavItem eventKey={2} href="#">Link</NavItem>
-                        <NavItem eventKey={2} onClick={() => this.routeChange('/sign-in')}>REACH YOUR GOALS</NavItem>
+                        {this.props.budget.user ?
+                            <NavItem>Hello, {this.props.budget.user} !</NavItem>
+                            :
+                            <NavItem onClick={() => this.routeChange('/sign-in')}>SET YOUR BUDGET AND GOALS, START SAVING !</NavItem>
+                        }
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
         );
     }
 
-}
+};
 
-export default connect()(TitleBar);
+export default connect( state => ({ budget: state.budget }))(TitleBar);
