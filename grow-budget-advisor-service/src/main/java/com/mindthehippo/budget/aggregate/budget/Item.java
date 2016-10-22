@@ -6,6 +6,7 @@ import java.util.UUID;
  * Budget item value object
  */
 public class Item {
+
     private final UUID id;
     private final Category category;
     private final float amount;
@@ -15,5 +16,17 @@ public class Item {
         this.category = category;
         this.amount = amount;
     }
-    
+
+    public UUID getId() {
+        return id;
+    }
+
+    public float getAmount() {
+        return amount;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
 }
