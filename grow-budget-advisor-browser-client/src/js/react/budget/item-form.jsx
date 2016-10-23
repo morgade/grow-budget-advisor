@@ -42,7 +42,7 @@ class ItemForm extends React.Component {
                 {
                     amount: this.state.amount,
                     text: this.state.text,
-                    category: this.state.category
+                    category: { id: this.state.category }
                 }
             )
         );
