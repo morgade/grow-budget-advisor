@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * Implements budget operations.
+ * Supplies methods for Rest Controllers.
  *
  * @author Novaes
  */
@@ -48,6 +50,15 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
         budgetRepository.store(account, goal);
     }
 
+    /**
+     * 
+     * creates new user budget if doesn't exist
+     * 
+     * @param account
+     * @param startWeek
+     * @param endWeek
+     * @return 
+     */
     @Override
     public BudgetDTO get(UUID account, int startWeek, int endWeek) {
         Budget budget = budgetRepository.get(account);
