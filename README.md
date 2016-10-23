@@ -19,7 +19,7 @@ as credit and debit transactions from external sources.
 
 As the user informs goals and budgeting itens, the application shows valuable information and tips.
 
-In order to keep our schedule safe we decide to mock most of the data and simplify the architecture, making it monolithical but with a hint of a microservices architecture.
+In order to keep our schedule safe we decide to mock most of the data and simplify the architecture, making it monolithic but with a hint of a microservices architecture.
 
 The project focused on defining the concept and a architecture for a financial advisor that uses bank transactions information to posts charts and tips in a dashboard to support the user in the pursuit of her goals.
 
@@ -37,8 +37,8 @@ The Java back end is based on Spring Boot and even though it performs no persist
 ### Instructions
 
 The frontend solution is a NPM NodeJS structure. To run the application just run:
-npm install
-npm build
+    npm install
+    npm run-script dev
 The backend solution was developed as a self contained application that can be deployed to a container or executed locally.
 The Maven build will create a Jar file. To run the application just use java -jar command on XXX-0.0.1-SNAPSHOT.jar. With current configurations, the embedded server will start serving on port 8080.
 
