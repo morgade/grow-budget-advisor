@@ -25,7 +25,7 @@ The project focused on defining the concept and a architecture for a financial a
 
 ### Technical Overview
 
-The Mind The Hippo Budgeting Advisor is a proof of concept web application developed with front-end React Js and back-end Java.
+The Mind The Hippo Budgeting Advisor is a proof of concept web application developed with React Js front-end and Java back-end.
 
 Front end ipsum
 
