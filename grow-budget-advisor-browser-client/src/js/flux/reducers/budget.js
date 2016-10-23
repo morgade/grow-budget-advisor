@@ -35,7 +35,7 @@ export default reducer(initialState, {
         objectAssign({}, state, { 
             pendingFetch: true
         }),
-        
+    
     [CommonActions.FETCH_BUDGET_REQUEST]: (state, action) =>
         objectAssign({}, state, { 
             pendingFetch: true

@@ -13,22 +13,22 @@ class Budget extends React.Component {
     
     render() {
         const items = this.props.budget.data.items.map( (item) => 
-            <Item key={item.id} item={item} /> 
-        );
+                <Item key={item.id} item={item} /> 
+            );
         
         return (
-            <div>
-                <PageHeader>
+                <div>
+                    <PageHeader>
                     <ItemForm />
-                    My planned budget
-                </PageHeader>
-
-                <ListGroup>
-                    {items}
-                </ListGroup>
-
-                
-            </div>
+                        My planned budget
+                    </PageHeader>
+                        
+                    <ListGroup>
+                        {items}
+                    </ListGroup>
+                    
+                    
+                </div>
         );
     }
 

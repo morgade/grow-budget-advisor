@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mindthehippo.budget.core;
 
 import com.mindthehippo.account.AccountEvent;
@@ -14,11 +9,12 @@ import com.mindthehippo.budget.application.BudgetApplicationService;
 import com.mindthehippo.budget.application.BudgetItemAccountEventMapper;
 import com.mindthehippo.budget.application.dto.BudgetDTO;
 import com.mindthehippo.budget.application.dto.ItemDTO;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Component;
 
 /**
@@ -30,6 +26,9 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
 
     @Autowired
     BudgetRepository budgetRepository;
+
+    @Autowired
+    ModelMapper modelMapper;
 
     @Autowired
     BudgetItemAccountEventMapper budgetItemAccountEventMapper;
@@ -50,12 +49,30 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
     @Override
     public BudgetDTO get(UUID account) {
         Budget budget = budgetRepository.get(account);
+        BudgetDTO dto;
         if (budget == null) {
             budget = new Budget(account);
             budgetRepository.store(budget);
-            return Budget.convertToDTO(budget);
+            dto = Budget.convertToDTO(budget);
         }
-        return Budget.convertToDTO(budgetRepository.get(account));
+        dto = Budget.convertToDTO(budgetRepository.get(account));
+        Map<Integer, Float> weekRealized = calculateWeeklyRealized(budget);
+        dto.setWeekRealized(weekRealized);
+        return dto;
+    }
+
+    private Map<Integer, Float> calculateWeeklyRealized(Budget budget) {
+        int currentWeek = Calendar.getInstance().getWeekYear();
+        Map<Integer, Float> r = new HashMap<>();
+        for (int i = currentWeek; i > currentWeek - 10; i--) {
+            float totalRealized = 0;
+
+            totalRealized = budget.getItems().stream().map(item -> item.getActualByWeek(currentWeek)).reduce(Float::sum).get();
+            
+            r.put(i, totalRealized);
+        }
+        return r;
+
     }
 
     @Override

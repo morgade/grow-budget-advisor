@@ -32,7 +32,7 @@ class Goals extends React.Component {
         return (
                 <div>
                     <PageHeader>
-                        <Button bsStyle="primary" className="pull-right" onClick={(evt)=>this.open()}>ADD GOAL</Button>
+                        <Button bsStyle="primary" className="pull-right" onClick={(evt)=>this.open()}>ADD ITEM</Button>
                         My Goals
                     </PageHeader>
                     

@@ -1,18 +1,10 @@
 /* global fetch */
-
-import objectAssign from 'object-assign';
-import cookie from 'cookie';
-
 // TODO: Use better conversion method
 function jsonToQueryString(json) {
     return Object.keys(json).map(function(key) {
             return encodeURIComponent(key) + '=' +
                 encodeURIComponent(json[key]);
         }).join('&');
-}
-
-function getCsrfToken() {
-    return cookie.parse(document.cookie)['XSRF-TOKEN'];
 }
 
 class Rest {
@@ -22,8 +14,7 @@ class Rest {
             credentials: 'same-origin',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': getCsrfToken()
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(body)
         })
@@ -35,8 +26,7 @@ class Rest {
             method: 'POST',
             credentials: 'same-origin',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'X-CSRF-TOKEN': getCsrfToken()
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: jsonToQueryString(body)
         })
@@ -49,8 +39,7 @@ class Rest {
             method: 'GET',
             credentials: 'same-origin',
             headers: {
-                'Accept': 'application/json',
-                'X-CSRF-TOKEN': getCsrfToken()
+                'Accept': 'application/json'
             }
         })
         .then(this.assertStatus)
@@ -62,8 +51,7 @@ class Rest {
             method: 'DELETE',
             credentials: 'same-origin',
             headers: {
-                'Accept': 'application/json',
-                'X-CSRF-TOKEN': getCsrfToken()
+                'Accept': 'application/json'
             }
         })
         .then(this.assertStatus);

@@ -16,8 +16,8 @@ public class Item {
     private final String text;
     private final Category category;
     private final float amount;
-
-    private final Map<Integer, AccountEvent> events = new HashMap();
+    
+    private final Map<Integer,Float> weeklyActualAmount = new HashMap<>();
 
     public Item(UUID id, String text, Category category, float amount) {
         this.id = id;
@@ -42,14 +42,29 @@ public class Item {
         return category;
     }
 
-    public Map<Integer, AccountEvent> getEvents() {
-        Map<Integer, AccountEvent> eventsClone = new HashMap();
-        eventsClone.putAll(events);
-        return eventsClone;
+    public Map<Integer, Float> getWeeklyActualAmount() {
+        Map<Integer, Float> weeklyActualAmountClone = new HashMap<>();
+        weeklyActualAmountClone.putAll(weeklyActualAmount);
+        return weeklyActualAmountClone;
     }
-
-    public void addAccountEvent(Integer week, AccountEvent accountEvent) {
-        events.put(week, accountEvent);
+    
+    public float getActualByWeek(int week){
+        return weeklyActualAmount.get(week);
+    }
+    
+    public void addAccountEvent(Integer week, AccountEvent accountEvent){
+        float amount = weeklyActualAmount.get(week);
+        switch(accountEvent.getType()){
+            case CREDIT:
+                amount+=accountEvent.getAmmount();
+                break;
+            case DEBIT:
+                amount-=accountEvent.getAmmount();
+                break;
+              
+                    
+        }
+        weeklyActualAmount.put(week,amount);
     }
 
     public static ItemDTO convertToDTO(Item item) {
