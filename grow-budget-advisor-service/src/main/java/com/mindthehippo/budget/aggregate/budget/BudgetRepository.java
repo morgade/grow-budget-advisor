@@ -1,6 +1,5 @@
 package com.mindthehippo.budget.aggregate.budget;
 
-import com.mindthehippo.budget.aggregate.goal.Goal;
 import java.util.List;
 import java.util.UUID;
 

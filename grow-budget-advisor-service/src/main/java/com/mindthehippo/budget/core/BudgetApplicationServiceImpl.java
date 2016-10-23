@@ -5,9 +5,10 @@ import com.mindthehippo.budget.aggregate.budget.Budget;
 import com.mindthehippo.budget.aggregate.budget.BudgetRepository;
 import com.mindthehippo.budget.aggregate.budget.Category;
 import com.mindthehippo.budget.aggregate.budget.Item;
-import com.mindthehippo.budget.aggregate.goal.Goal;
+import com.mindthehippo.budget.aggregate.budget.Goal;
 import com.mindthehippo.budget.application.BudgetApplicationService;
 import com.mindthehippo.budget.application.BudgetItemAccountEventMapper;
+import com.mindthehippo.budget.application.WonderfulTipService;
 import com.mindthehippo.budget.application.dto.BudgetDTO;
 import com.mindthehippo.budget.application.dto.GoalDTO;
 import com.mindthehippo.budget.application.dto.ItemDTO;
@@ -30,6 +31,9 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
 
     @Autowired
     BudgetItemAccountEventMapper budgetItemAccountEventMapper;
+    
+    @Autowired
+    WonderfulTipService wonderfulTipService;
 
     @Override
     public void store(UUID account, ItemDTO itemDTO) {
@@ -69,6 +73,7 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
             budgetRepository.store(budget);
         }
         dto = Budget.convertToDTO(budgetRepository.get(account), startWeek, endWeek);
+        dto.setTips(wonderfulTipService.get(account));
         return dto;
     }
 

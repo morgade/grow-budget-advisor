@@ -40,11 +40,12 @@ public class WonderfulTipServiceImpl implements WonderfulTipService {
     static List<TipDTO> tips = Arrays.asList(new TipDTO(tip1), new TipDTO(tip3), new TipDTO(tip3));
 
     @Override
-    public TipDTO get(UUID account) {
+    public List<TipDTO>  get(UUID account) {
         Budget budget = budgetRepository.get(account);
-        // analyzes items and goals.. returns a wonderful tip
-        Random rd = new Random();
-        return tips.get(rd.nextInt(2));
+        // analyzes items and goals.. returns wonderful tips
+        //Random rd = new Random();
+        //return tips.get(rd.nextInt(2));
+        return tips;
     }
 
 }

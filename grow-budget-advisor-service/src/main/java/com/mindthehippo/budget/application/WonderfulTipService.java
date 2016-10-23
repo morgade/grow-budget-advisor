@@ -1,6 +1,7 @@
 package com.mindthehippo.budget.application;
 
 import com.mindthehippo.budget.application.dto.TipDTO;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -9,6 +10,6 @@ import java.util.UUID;
  */
 public interface WonderfulTipService {
 
-    TipDTO get(UUID accountId);
-
+    List<TipDTO> get(UUID accountId);
+    
 }
