@@ -28,9 +28,6 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
     BudgetRepository budgetRepository;
 
     @Autowired
-    ModelMapper modelMapper;
-
-    @Autowired
     BudgetItemAccountEventMapper budgetItemAccountEventMapper;
 
     @Override
