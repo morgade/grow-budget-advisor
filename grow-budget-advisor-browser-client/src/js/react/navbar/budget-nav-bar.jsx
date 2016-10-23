@@ -4,6 +4,8 @@ import NavItem from 'react-bootstrap/lib/NavItem';
 import NavDropdown from 'react-bootstrap/lib/NavDropdown';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
+import Button from 'react-bootstrap/lib/Button';
+import FormGroup from 'react-bootstrap/lib/FormGroup';
 import { connect, dispatch } from 'react-redux'
 
 import * as RouteActions from '../../flux/actions/route';
@@ -39,13 +41,19 @@ class TitleBar extends React.Component {
                             : 
                             null
                         }
-                    <Nav pullRight>
+                    
                         {this.props.budget.user ?
-                            <NavItem>Hello, {this.props.budget.user} !</NavItem>
+                            <Nav pullRight>
+                                <NavItem>Hello, {this.props.budget.user} !</NavItem>
+                            </Nav>
                             :
-                            <NavItem onClick={() => this.routeChange('/sign-in')}>SET YOUR BUDGET AND GOALS, START SAVING !</NavItem>
+                            <Navbar.Form pullRight>
+                                <FormGroup>
+                                    <Button bsStyle="primary" onClick={() => this.routeChange('/sign-in')}>SET YOUR BUDGET AND GOALS, START SAVING !</Button>
+                                </FormGroup>
+                            </Navbar.Form>
                         }
-                    </Nav>
+                    
                 </Navbar.Collapse>
             </Navbar>
         );

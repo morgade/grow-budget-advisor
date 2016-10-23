@@ -6,15 +6,14 @@ import com.mindthehippo.budget.application.WonderfulTipService;
 import com.mindthehippo.budget.application.dto.TipDTO;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * Implements something advanced to analyze user budget and give him amazing
- * tips to achieve his goals. Save money decreasing expenses, dealing loans or
- * investments
+ * This should analyze items and goals, process account events, do some data 
+ * science to generate great tips for the user to achieve his goals. 
+ * Save money decreasing expenses, dealing loans or investments
  *
  * @author Novaes
  */
@@ -24,28 +23,25 @@ public class WonderfulTipServiceImpl implements WonderfulTipService {
     @Autowired
     BudgetRepository budgetRepository;
 
-    static final String tip1 = "<strong>Valuable Tip!</strong> Looks like a fair part"
+    private TipDTO[] mockTips = {
+        new TipDTO("<strong>Valuable Tip!</strong> Looks like a fair part"
             + " of your budget is used to pay loan installments. \n"
             + "Did you know that <a href=\"http://partnerpage.com\">Bank X</a> "
             + "has great interest rates ? Lowering loan installments in 10% "
-            + "would allow you to reach the 'New TV' goal <b>X weeks faster</b> !";
-
-    static final String tip2 = "<strong>Warning!</strong> You increase your expenses "
-            + "eating out this week. Evaluate this cost and keep moving to buy "
-            + "your 'New Bicycle' goal in <b>X weeks</b> !";
-
-    static final String tip3 = "<strong>Amazing !</strong> Your new investment was a good return last week. "
-            + "Consider to allocate X more into this investment and ";
-
-    static List<TipDTO> tips = Arrays.asList(new TipDTO(tip1), new TipDTO(tip3), new TipDTO(tip3));
+            + "would allow you to reach the 'New TV' goal <b>X weeks faster</b> !", "warning"),
+        new TipDTO("<strong>Good Job!</strong>You are spending with utilities bills less "
+                + "than what was foressen in your budget ! It's a good way to saving for your goals. "
+                + "If you adjust your budget to what was realized, you will reach the 'New TV' <b>X weeks faster</b>", "success"),
+        new TipDTO("<strong>Taxes are inevitable ....</strong>"
+                + "And your budget has been suffering with it. Did you know that investing in <a href=\"http://partnerpage.com\">X invest</a>"
+                + "you can deduct taxes and save still more for your goals ? Give it a try !", "danger"),
+    };
 
     @Override
     public List<TipDTO>  get(UUID account) {
         Budget budget = budgetRepository.get(account);
-        // analyzes items and goals.. returns wonderful tips
-        //Random rd = new Random();
-        //return tips.get(rd.nextInt(2));
-        return tips;
+        // TODO: analyze items and goals, proccess account events, do some data science to generate great tips for the user dashboard !
+        return Arrays.asList(mockTips);
     }
 
 }

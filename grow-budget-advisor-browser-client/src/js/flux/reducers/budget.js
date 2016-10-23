@@ -19,7 +19,8 @@ const initialState =  {
     categories: [],
     data: { 
       items: [ ],
-      goals: [ ]
+      goals: [ ],
+      tips: []
     }
 };
 

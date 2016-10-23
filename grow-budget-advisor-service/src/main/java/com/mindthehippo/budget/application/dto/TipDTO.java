@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mindthehippo.budget.application.dto;
 
 /**
@@ -12,9 +7,19 @@ package com.mindthehippo.budget.application.dto;
 public class TipDTO {
 
     private String text;
+    private String kind;
 
-    public TipDTO(String text) {
+    public TipDTO(String text, String kind) {
         this.text = text;
+        this.kind = kind;
+    }
+
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
     }
     
 

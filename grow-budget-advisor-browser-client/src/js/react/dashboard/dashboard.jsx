@@ -11,6 +11,7 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 
 import ChartJS from 'react-chartjs';
 
+import Tip from './tip.jsx';
 
 class Dashboard extends React.Component {
 
@@ -152,9 +153,9 @@ var chartOptions = {
         }
     };
     
-    let goaldropdownOptions = this.props.budget.data.goals.map(goal => (
+    let goaldropdownOptions = this.props.budget.data.goals.map(goal => 
         <MenuItem eventKey={goal.id} key={goal.id}>{goal.text}</MenuItem>
-    ));
+    );
     
         return (
                 <div>
@@ -170,28 +171,14 @@ var chartOptions = {
                             {goaldropdownOptions}
                         </DropdownButton>
                         <ChartJS.Line data={chartData2} options={chartOptions} width="100" />
-                          </Col>
-                    </Row>
-                    <Row>
-                        <Col md={12}>
-                        <Alert bsStyle="warning">
-                            <strong>Valuable Tip!</strong> Looks like a fair part of your budget is used to pay loan installments. 
-                            Did you know that <a href="http://partnerpage.com">Bank X</a> has great interest rates ? Lowering loan installments in 10% would allow you to reach the 'New TV' goal <b>X weeks faster</b> !
-                          </Alert>
                         </Col>
-                    </Row>
-                    <Row>
-                        <Col md={6}>
-                        <Alert bsStyle="success">
-                            <strong>Good Job!</strong> You are spending with utilities bills less than what was foressen in your budget ! It's a good way to saving for your goals.
-                            If you adjust your budget to what was realized, you will reach the 'New TV' <b>X weeks faster</b>
-                          </Alert>
-                          </Col>
-                        <Col md={6}>
-                        <Alert bsStyle="danger">
-                        <strong>Taxes are inevitable ....</strong>  And your budget has been suffering with it. Did you know that investing in <a href="http://partnerpage.com">X invest</a> you can deduct taxes and save still more for your goals ? Give it a try !
-                          </Alert>
-                          </Col>
+                        <Row>
+                            {this.props.budget.data.tips.length>0 ? <Tip col={12} text={this.props.budget.data.tips[0].text} kind={this.props.budget.data.tips[0].kind} /> : null}
+                        </Row>
+                        <Row>
+                            {this.props.budget.data.tips.length>1 ? <Tip col={6} text={this.props.budget.data.tips[1].text} kind={this.props.budget.data.tips[1].kind} /> : null}
+                            {this.props.budget.data.tips.length>2 ? <Tip col={6} text={this.props.budget.data.tips[2].text} kind={this.props.budget.data.tips[2].kind} /> : null}
+                        </Row>
                     </Row>
                 </div>
         );
