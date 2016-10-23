@@ -96,9 +96,9 @@ public class MockService {
                             "Credit Card debts",  
                             categories.get(BudgetInMemoryRepository.CATEGORY_LOAN), 
                             random.nextInt(200)+50));
-            Goal g1 = new Goal(UUID.randomUUID(),fullAccount,"Trip to the Moon",20000000f,1);
-            Goal g2 = new Goal(UUID.randomUUID(),fullAccount,"New Boat",150000f,1);
-            Goal g3 = new Goal(UUID.randomUUID(),fullAccount,"XMas",5000f,1);
+            Goal g3 = new Goal(UUID.randomUUID(),fullAccount,"XMas",100f,1);
+            Goal g2 = new Goal(UUID.randomUUID(),fullAccount,"Bike",500f,1);
+            Goal g1 = new Goal(UUID.randomUUID(),fullAccount,"Suborbital Spacefligth",1000f,1);
             budgetRepository.store(fullAccount, g1);
             budgetRepository.store(fullAccount, g2);
             budgetRepository.store(fullAccount, g3);
