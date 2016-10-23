@@ -18,7 +18,7 @@ The solution is a budget advisor tool intended to be bound to a bigger banking e
 as the credit and debit transactions from external sources. As the user informs goals and budgeting itens, the application
 shows valuable information and tips.
 
-In order to keep our schedule safe and 
+In order to keep our schedule safe we decide to mock most of the data, and simplify the architecture, making it monolithical but with a hint of a microservices architecture.
 
 ### Instructions
 
