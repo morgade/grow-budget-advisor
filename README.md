@@ -21,6 +21,14 @@ As the user informs goals and budgeting itens, the application shows valuable in
 
 In order to keep our schedule safe we decide to mock most of the data and simplify the architecture, making it monolithical but with a hint of a microservices architecture.
 
+### Technical Overview
+
+The Mind The Hippo Budgeting Advisor is a proof of concept web application developed with front-end React Js and back-end Java.
+
+Front end ipsum
+
+The Java back end is based on Spring Boot and even though it performs no persistence holding all the data in memory, it's fully prepared and designed to persist the data. We simulated a event sourcing comunication between a mocked external service for accounting data and the budget service.
+
 ### Instructions
 
 The solution was developed as a self contained application that can be deployed to a container or executed locally.
