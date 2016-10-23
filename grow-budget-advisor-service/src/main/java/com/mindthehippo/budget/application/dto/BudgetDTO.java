@@ -18,6 +18,7 @@ public class BudgetDTO {
     
     public BudgetDTO() {
         items = new ArrayList<>();
+        goals = new ArrayList<>();
     }
 
     public BudgetDTO(String account, List<ItemDTO> items, List<GoalDTO> goals) {
