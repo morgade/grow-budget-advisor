@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import static java.util.stream.Collectors.toList;
 
 /**
  *
@@ -53,9 +54,12 @@ public class Budget {
     public static BudgetDTO convertToDTO(Budget budget) {
         BudgetDTO budgetDTO = new BudgetDTO();
         budgetDTO.setAccount(budget.getAccount().toString());
-        for (Item item : budget.getItems()) {
-            budgetDTO.getItems().add(Item.convertToDTO(item));
-        }
+        budgetDTO.getItems().addAll(
+            budget.getItems().stream().map(Item::convertToDTO).collect(toList())
+        );
+        budgetDTO.getGoals().addAll(
+            budget.getGoals().stream().map(Goal::convertToDTO).collect(toList())
+        );
         return budgetDTO;
     }
 

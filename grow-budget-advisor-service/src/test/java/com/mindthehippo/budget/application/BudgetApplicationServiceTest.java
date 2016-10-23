@@ -8,6 +8,7 @@ import com.mindthehippo.budget.aggregate.goal.Goal;
 import com.mindthehippo.budget.application.dto.BudgetDTO;
 import com.mindthehippo.budget.application.dto.ItemDTO;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import org.junit.After;
@@ -75,7 +76,7 @@ public class BudgetApplicationServiceTest {
         List<ItemDTO> items = Arrays.asList(new ItemDTO(UUID.randomUUID().toString(),
                 1000F, "Company A",
                 new Category("UTILITIES", "UTILITIES", false)));
-        BudgetDTO budgetDTO = new BudgetDTO(account.toString(), items);
+        BudgetDTO budgetDTO = new BudgetDTO(account.toString(), items, Collections.EMPTY_LIST);
         BudgetDTO expBudget = budgetApplicationService.get(account);
         assertEquals(expBudget.getAccount(), budgetDTO.getAccount());
         assertEquals(expBudget.getItems().get(0).getText(),
