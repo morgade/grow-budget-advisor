@@ -5,31 +5,99 @@ import PageHeader from 'react-bootstrap/lib/PageHeader';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Alert from 'react-bootstrap/lib/Alert';
+import DropdownButton from 'react-bootstrap/lib/DropdownButton';
+import MenuItem from 'react-bootstrap/lib/MenuItem';
+import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 
 import ChartJS from 'react-chartjs';
 
 
 class Dashboard extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedGoal: null
+        };
+    }
+    
+    getGoal(id) {
+        let goals = this.props.budget.data.goals;
+        for (let i=0; i<goals.length; i++) {
+            if (goals[i].id===id) {
+                return goals[i];
+            }
+        }
+        return null;
+    }
+    
+    selectGoal(id) {
+        let goal = this.getGoal(id);
+        this.setState({
+            selectedGoal: goal
+        });
+    }
     
     render() {
-        const weekLabels = [];// ["Week 1", "2", "3", "4", "5", "6", "7"],
-        const budgetPlannedSeq = [];//[90, 90, 90, 90, 90, 90, 90];
-        const realizedSeq = [];//[90, 90, 90, 90, 90, 90, 90];
+        let selectedGoal = this.state.selectedGoal;
+        if (selectedGoal===null) {
+            selectedGoal = this.props.budget.data.goals.length>0 ?
+                                    this.props.budget.data.goals[0]
+                                    :
+                                    { id:null, text: 'No goals found' };
+            
+        }
+        
+        const weeksNumbers = (container) => {
+            var weeks = [];
+            for (var weekNumber in weekRealized) {
+                if (weekRealized.hasOwnProperty(weekNumber)) {
+                    weeks.push(parseInt(weekNumber));
+                }
+            }
+            return weeks.sort( (a,b) => a-b );
+        };
+        
+        const realizedWeekLabels = [];
+        const budgetPlannedSeq = [];
+        const realizedSeq = [];
         const weekRealized = this.props.budget.data.weekExpenses;
-        for (var weekNumber in weekRealized) {
-            if (weekRealized.hasOwnProperty(weekNumber)) {
-                weekLabels.push(weekNumber.toString());
-                budgetPlannedSeq.push(this.props.budget.data.weekIncomes[weekNumber.toString()]);
-                realizedSeq.push(weekRealized[weekNumber.toString()]);
+        const weeks = weeksNumbers(weekRealized);
+        
+        for (let i=0; i<weeks.length; i++) {
+            if (weekRealized.hasOwnProperty(weeks[i])) {
+                realizedWeekLabels.push(weeks[i].toString());
+                budgetPlannedSeq.push(this.props.budget.data.weekIncomes[weeks[i].toString()]);
+                realizedSeq.push(weekRealized[weeks[i].toString()]);
             }
         }
         
-        if (weekLabels.length>0) {
-            weekLabels[0] = "Week "+ weekLabels[0];
+        if (realizedWeekLabels.length>0) {
+            realizedWeekLabels[0] = "Week "+ realizedWeekLabels[0];
         }
         
+        let goalProgressDatasets = {};
+        let goalAmountDatasets = {};
+        let goalProgress = this.props.budget.data.goalProgress;
+        for (let id in goalProgress) {
+            if (goalProgress.hasOwnProperty(id)) {
+                let goal = this.getGoal(id);
+                goalProgressDatasets[id] = [];
+                goalAmountDatasets[id] = [];
+                const weeks = weeksNumbers(goalProgress[id]);
+                for (let i=0; i<weeks.length; i++) {
+                    if (goalProgress[id].hasOwnProperty(weeks[i])) {
+                        goalProgressDatasets[id].push(goalProgress[id][weeks[i]]);
+                        goalAmountDatasets[id].push(goal.amount);
+                    }
+                }
+            }
+        }
+        
+        
+        
         const chartDataBudgetRealized = {
-            labels: weekLabels,
+            labels: realizedWeekLabels,
             datasets: [
                 {
                     label: "Income",
@@ -58,7 +126,7 @@ class Dashboard extends React.Component {
             strokeColor: "rgba(120,220,120,0.8)",
             highlightFill: "rgba(120,220,120,0.75)",
             highlightStroke: "rgba(120,220,120,1)",
-            data: [100, 100, 100, 100, 100, 100, 100]
+            data: goalAmountDatasets[selectedGoal.id]//[100, 100, 100, 100, 100, 100, 100]
         },
         {
             label: "Realized",
@@ -66,7 +134,7 @@ class Dashboard extends React.Component {
             strokeColor: "rgba(101,107,205,0.8)",
             highlightFill: "rgba(101,107,205,0.75)",
             highlightStroke: "rgba(101,107,205,1)",
-            data: [12, 28, 40, 45, 47, 56, 80]
+            data: goalProgressDatasets[selectedGoal.id]//[12, 28, 40, 45, 47, 56, 80]
         }
     ]
 };
@@ -83,17 +151,25 @@ var chartOptions = {
             }]
         }
     };
+    
+    let goaldropdownOptions = this.props.budget.data.goals.map(goal => (
+        <MenuItem eventKey={goal.id} key={goal.id}>{goal.text}</MenuItem>
+    ));
+    
         return (
                 <div>
-                    <PageHeader>Graphs'n Tips</PageHeader>
+                    <PageHeader>Charts'n Tips</PageHeader>
                     <Row>
                         <Col md={6}>
-                        <b>Budget X Realized</b>
-            <ChartJS.Line data={chartDataBudgetRealized} options={chartOptions} width="100" />
+                        <ControlLabel>Income X Expense</ControlLabel>
+                            <ChartJS.Line data={chartDataBudgetRealized} options={chartOptions} width="100" />
                           </Col>
                         <Col md={6}>
-                        <b>'My new TV' Progress [2 weeks more to reach !]</b>
-            <ChartJS.Line data={chartData2} options={chartOptions} width="100" />
+                        <b>Goal Progress: </b>
+                        <DropdownButton title={selectedGoal.text} id="bgoal-dropdown" onSelect={(eventKey, evt) => this.selectGoal(eventKey)}>
+                            {goaldropdownOptions}
+                        </DropdownButton>
+                        <ChartJS.Line data={chartData2} options={chartOptions} width="100" />
                           </Col>
                     </Row>
                     <Row>

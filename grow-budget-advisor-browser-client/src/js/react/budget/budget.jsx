@@ -5,6 +5,9 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ListGroup from 'react-bootstrap/lib/ListGroup';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
 import Button from 'react-bootstrap/lib/Button';
+import ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
+import Label from 'react-bootstrap/lib/Label';
+import NumberFormat from 'react-number-format';
 import Item from './item.jsx';
 import ItemForm from './item-form.jsx';
 import * as BudgetActions from '../../flux/actions/budget';
@@ -12,9 +15,15 @@ import * as BudgetActions from '../../flux/actions/budget';
 class Budget extends React.Component {
     
     render() {
-        const items = this.props.budget.data.items.map( (item) => 
+        let items = this.props.budget.data.items.map( (item) => 
                 <Item key={item.id} item={item} /> 
             );
+        items.push(<ListGroupItem bsStyle="info">
+                Expected Balance:
+                <Label bsStyle={this.props.budget.data.expectedBalance>0?"success":"danger"} className="pull-right full-font">
+                    <NumberFormat value={this.props.budget.data.expectedBalance} displayType="text" thousandSeparator={true} prefix="$" />
+                </Label>
+            </ListGroupItem>);
         
         return (
                 <div>
