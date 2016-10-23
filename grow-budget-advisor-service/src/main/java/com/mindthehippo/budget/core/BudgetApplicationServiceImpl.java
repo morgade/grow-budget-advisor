@@ -58,7 +58,6 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
         if (budget == null) {
             budget = new Budget(account);
             budgetRepository.store(budget);
-            dto = Budget.convertToDTO(budget);
         }
         dto = Budget.convertToDTO(budgetRepository.get(account));
         Map<Integer, Float> weekRealized = calculateWeeklyRealized(budget);
