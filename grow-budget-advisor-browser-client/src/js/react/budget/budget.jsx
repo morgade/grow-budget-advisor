@@ -18,7 +18,7 @@ class Budget extends React.Component {
         let items = this.props.budget.data.items.map( (item) => 
                 <Item key={item.id} item={item} /> 
             );
-        items.push(<ListGroupItem bsStyle="info">
+        items.push(<ListGroupItem key="_expected_balance"  bsStyle="info">
                 Expected Balance:
                 <Label bsStyle={this.props.budget.data.expectedBalance>0?"success":"danger"} className="pull-right full-font">
                     <NumberFormat value={this.props.budget.data.expectedBalance} displayType="text" thousandSeparator={true} prefix="$" />

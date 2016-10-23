@@ -33,7 +33,11 @@ class ItemForm extends React.Component {
     }
     
     onChange(evt, field) {
-        this.setState({ [field]: evt.target.value });
+        var change = { [field]: evt.target.value };
+        if (field==='kind') {
+            change.category = evt.target.value === 'INCOME' ? this.state.incomes[0].id : this.state.expenses[0].id;
+        }
+        this.setState(change);
     }
 
     confirm() {
@@ -52,7 +56,7 @@ class ItemForm extends React.Component {
     }
     
     componentWillReceiveProps(newProps) {
-        let categories = { incomes: [], expenses: [], category: newProps.budget.categories.length?newProps.budget.categories[0].id:'' };
+        let categories = { incomes: [], expenses: [] };
         for (let i=0; i<newProps.budget.categories.length; i++) {
             if (newProps.budget.categories[i].income) {
                 categories.incomes.push(newProps.budget.categories[i]);
@@ -60,7 +64,7 @@ class ItemForm extends React.Component {
                 categories.expenses.push(newProps.budget.categories[i]);
             }
         }
-        
+        categories.category = categories.incomes[0] ? categories.incomes[0].id : null;
         this.setState(categories);
     }
     
