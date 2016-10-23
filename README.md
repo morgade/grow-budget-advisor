@@ -47,10 +47,10 @@ Choosing this challenge caused in everone of us the strange feeling of being sup
 
 We've been working together for almost ten years in several projects and endeavors, always delivering state of the art simplicity.
 
--- André Luiz Teixeira Novaes - Fullstack engineer | @altn80 | andre.novaes@gmail.com
+-- André Luiz Teixeira Novaes - Full-stack engineer | @altn80 | andre.novaes@gmail.com
 
 -- Lucas da Silva Lopes Furtado - Back-end engineer | @lucasslf | lucasslf@gmail.com
 
--- Marcelo Burgos Morgade Cortizo - Fullstack engineer | @morgade | morgade@gmail.com
+-- Marcelo Burgos Morgade Cortizo - Full-stack engineer | @morgade | morgade@gmail.com
 
 http://mindthehippo.com/
