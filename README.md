@@ -31,7 +31,7 @@ The front end is a node/npm "webpackaged" ReactJS single page application coordi
 
 The Java back end is based on Spring Boot and even though it performs no persistence holding all the data in memory, it's fully prepared and designed to persist the data. We simulated a event sourcing comunication between a mocked external service for accounting data and the budget service. The back-end is exposed to the front-end through a REST API.
 
-![Back-end architecture](/backend-architecture.jpeg)
+![Back-end architecture](/backend-architecture.png)
 
 
 ### Instructions
