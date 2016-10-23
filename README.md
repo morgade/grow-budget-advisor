@@ -10,7 +10,7 @@ Budgeting Tool
 In this challenge we were asked to develop a budgeting tool which would help someone to define goals and save money in order
 to achieve those goals, considering the context of a online banking account.
 
-We, as a team, believe that this challenge fits the best with our technical skills. Almost too perfectly.
+We, as a team, believe that this challenge fits the best with our technical skills. Almost too perfectly, as we are Java guys. You know,  those type of Java guys that still loves Java.
 
 ### The Tool
 
@@ -18,6 +18,7 @@ The solution is a budget advisor tool intended to be bound to a bigger banking e
 as the credit and debit transactions from external sources. As the user informs goals and budgeting itens, the application
 shows valuable information and tips.
 
+In order to keep our schedule safe and 
 
 ### Instructions
 
