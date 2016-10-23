@@ -34,15 +34,16 @@ public class Budget {
     
     public Map<Integer, Float> getWeekProfit() {
         Map<Integer, Float> weeklyProfit = new HashMap<>();
-        int currentWeek = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
         float plannedBudget = getPlannedBudget();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 1; i < 54; i++) {
             
             float totalRealized = 0;
-            final int index = currentWeek - i;
+            float profit = 0;
+            final int index = i;
             totalRealized = getItems().stream().map(item -> item.getActualByWeek(index)).reduce(Float::sum).get();
-            
-            weeklyProfit.put(index, totalRealized - plannedBudget);
+            profit = totalRealized - plannedBudget;
+            weeklyProfit.put(index, profit);
+            plannedBudget-=totalRealized;
         }
         return weeklyProfit;
     }
