@@ -3,23 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mindthehippo.account;
+package com.mindthehippo.budget.aggregate.budget;
 
 import java.util.UUID;
-import org.springframework.security.core.userdetails.User;
 
 /**
- * User Account Information. 
- * It will be persisted in Security Principal.
- * 
+ *
  * @author Novaes
  */
-public class Account extends User {
+public class Tip {
 
     private final UUID id;
+    private final String text;
 
-    public Account(UUID id) {
-        super(null, null, null);
+    public Tip(UUID id, String text) {
         this.id = id;
+        this.text = text;
     }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
 }

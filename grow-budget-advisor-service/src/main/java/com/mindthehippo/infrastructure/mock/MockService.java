@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mindthehippo.infrastructure.mock;
 
 import com.mindthehippo.account.EventDispatcher;
@@ -12,7 +7,6 @@ import com.mindthehippo.budget.aggregate.budget.Category;
 import com.mindthehippo.budget.aggregate.budget.Item;
 import com.mindthehippo.budget.aggregate.goal.Goal;
 import com.mindthehippo.budget.core.BudgetInMemoryRepository;
-import static java.lang.Math.random;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -22,6 +16,9 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
+ * Contains existing user accounts.
+ * Creates an account with fixed data.
+ * 
  *
  * @author Novaes
  */
@@ -51,19 +48,11 @@ public class MockService {
 
     public void mock() {
         UUID fullAccount = getAccount("dennis");
-        Map<String, Category> categories = budgetRepository.getItemCategories().stream().collect(Collectors.toMap(c-> c.getId(), c-> c));
-//        String[] names = new String[]{"Paycheck", "Electricity", "Water/sewer"};
+        Map<String, Category> categories = budgetRepository.getItemCategories().
+                stream().collect(Collectors.toMap(c-> c.getId(), c-> c));
         if (!categories.isEmpty()
                 && budgetRepository.get(fullAccount) == null) {
             budgetRepository.store(new Budget(fullAccount));
-//            for (int i = 0; i < 20; i++) {
-//                Random random = new Random();
-//                int categoryIndex = random.nextInt(3);
-//                budgetRepository.store(fullAccount,
-//                        new Item(UUID.randomUUID(), names[categoryIndex],
-//                                categories.get(categoryIndex),
-//                                random.nextInt(1000)));
-//            }
 
             Random random = new Random();
             budgetRepository.store(fullAccount, 

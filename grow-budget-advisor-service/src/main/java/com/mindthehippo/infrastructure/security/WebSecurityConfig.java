@@ -22,7 +22,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.csrf.CsrfFilter;
 
 /**
- *
+ * Implements basic authentication
+ * 
  * @author Marcelo
  */
 // TODO: CHANGE TO OAuth based authentication

@@ -13,7 +13,9 @@ import java.util.UUID;
 import org.springframework.stereotype.Component;
 
 /**
- *
+ *  Persists Budget data in Memory.
+ *  TODO: NOSQL DB persistence ???
+ * 
  * @author Novaes
  */
 @Component

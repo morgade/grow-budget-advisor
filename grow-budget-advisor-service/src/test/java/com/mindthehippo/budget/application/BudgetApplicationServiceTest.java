@@ -47,10 +47,10 @@ public class BudgetApplicationServiceTest {
     }
 
     /**
-     * Test of getItens method, of class BudgetApplicationService.
+     * Test of get method, of class BudgetApplicationService.
      */
     @org.junit.Test
-    public void testGetItens() {
+    public void testGet() {
         UUID account = UUID.fromString("7f713be0-b7ed-4aba-b69c-972ee3203253");
         List<ItemDTO> items = Arrays.asList(new ItemDTO(UUID.randomUUID().toString(),
                 1000F, "Water/sewer",
@@ -58,6 +58,5 @@ public class BudgetApplicationServiceTest {
         BudgetDTO budgetDTO = new BudgetDTO(account.toString(), items, Collections.EMPTY_LIST);
         BudgetDTO expBudget = budgetApplicationService.get(account, 1, 10);
         assertEquals(expBudget.getAccount(), budgetDTO.getAccount());
-
     }
 }

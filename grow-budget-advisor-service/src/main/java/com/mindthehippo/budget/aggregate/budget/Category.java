@@ -1,7 +1,5 @@
 package com.mindthehippo.budget.aggregate.budget;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
  * Budget item category value object
  */
@@ -20,8 +18,6 @@ public class Category {
         this.income = income;
     }
 
-    
-    
     public boolean isIncome() {
         return income;
     }
