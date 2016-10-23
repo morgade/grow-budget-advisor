@@ -30,7 +30,8 @@ public class Budget {
     public List<Item> getItems() {
         return items;
     }
-
+    
+    // TODO: Spring Converter
     public static BudgetDTO convertToDTO(Budget budget) {
         BudgetDTO budgetDTO = new BudgetDTO();
         budgetDTO.setAccount(budget.getAccount().toString());

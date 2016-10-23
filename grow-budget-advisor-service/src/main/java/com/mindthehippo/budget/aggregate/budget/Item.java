@@ -66,7 +66,8 @@ public class Item {
         }
         weeklyActualAmount.put(week,amount);
     }
-
+    
+    // TODO: Spring Converter
     public static ItemDTO convertToDTO(Item item) {
         ItemDTO itemDTO = new ItemDTO();
         itemDTO.setId(item.getId().toString());
