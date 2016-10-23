@@ -11,13 +11,6 @@ import * as BudgetActions from '../../flux/actions/budget';
 
 class Budget extends React.Component {
     
-    componentDidMount() {
-        if (this.props.budget.data.items.length===0) {
-            this.props.dispatch(BudgetActions.fetchBudget(this.props.budget.account));
-        }
-    }
-     
-
     render() {
         const items = this.props.budget.data.items.map( (item) => 
             <Item key={item.id} item={item} /> 

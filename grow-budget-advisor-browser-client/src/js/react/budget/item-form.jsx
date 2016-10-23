@@ -49,7 +49,7 @@ class ItemForm extends React.Component {
     }
     
     componentWillReceiveProps(newProps) {
-        let categories = { incomes: [], expenses: [], category: newProps.budget.categories[0].id };
+        let categories = { incomes: [], expenses: [], category: newProps.budget.categories.length?newProps.budget.categories[0].id:'' };
         for (let i=0; i<newProps.budget.categories.length; i++) {
             if (newProps.budget.categories[i].income) {
                 categories.incomes.push(newProps.budget.categories[i]);
@@ -61,14 +61,10 @@ class ItemForm extends React.Component {
         this.setState(categories);
     }
     
-    componentDidMount() {
-        this.props.dispatch(BudgetActions.fetchCategories());
-    }
-    
     render() {
         const categories = this.state.kind === 'INCOME' ? this.state.incomes : this.state.expenses;
         const categoriesOptions = categories.map( (item) => 
-            <option value={item.id}>{item.text}</option>
+            <option key={item.id} value={item.id}>{item.text}</option>
         );
         
         return (
@@ -104,7 +100,7 @@ class ItemForm extends React.Component {
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                              <Button bsStyle="danger" onClick={(evt) => this.close()}>Cancel</Button>
+                              <Button bsStyle="danger" onClick={this.close.bind(this)}>Cancel</Button>
                               <Button bsStyle="primary" onClick={(evt) => this.confirm()}>Create</Button>
                     </Modal.Footer>
                 </Modal>

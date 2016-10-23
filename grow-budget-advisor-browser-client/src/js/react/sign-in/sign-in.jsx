@@ -12,6 +12,7 @@ import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 
 import * as CommonActions from '../../flux/actions/common';
 import * as RouteActions from '../../flux/actions/route';
+import * as BudgetActions from '../../flux/actions/budget';
 import * as NotificationActions from '../../flux/actions/notification';
 
 class SignInForm extends React.Component {
@@ -30,10 +31,11 @@ class SignInForm extends React.Component {
     }
     
     componentWillReceiveProps(props) {
-        console.log(props.authenticationFeedback);
-        if (props.authenticationFeedback && props.authenticationFeedback.failure) {
-            this.props.dispatch(NotificationActions.notifyError(props.authenticationFeedback.failure));
-        } else if (props.authenticationFeedback && props.authenticationFeedback.authenticated) {
+        if (props.budget.authenticationFeedback && props.budget.authenticationFeedback.failure) {
+            this.props.dispatch(NotificationActions.notifyError(props.budget.authenticationFeedback.failure));
+        } else if (props.budget.authenticationFeedback && props.budget.authenticationFeedback.authenticated) {
+            this.props.dispatch(BudgetActions.fetchBudget(props.budget.authenticationFeedback.authenticated.account));
+            this.props.dispatch(BudgetActions.fetchCategories());
             this.props.dispatch(RouteActions.routeChange('/budget'));
         }
     }
@@ -75,5 +77,5 @@ class SignInForm extends React.Component {
 };
 
 export default connect( state => ({ 
-        authenticationFeedback: state.budget.authenticationFeedback
+        budget: state.budget
     }))(SignInForm);
