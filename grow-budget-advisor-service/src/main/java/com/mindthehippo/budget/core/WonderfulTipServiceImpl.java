@@ -33,7 +33,7 @@ public class WonderfulTipServiceImpl implements WonderfulTipService {
                 + "than what was foressen in your budget ! It's a good way to saving for your goals. "
                 + "If you adjust your budget to what was realized, you will reach the 'New TV' <b>X weeks faster</b>", "success"),
         new TipDTO("<strong>Taxes are inevitable ....</strong>"
-                + "And your budget has been suffering with it. Did you know that investing in <a href=\"http://partnerpage.com\">X invest</a>"
+                + "And your budget has been suffering with it. Did you know that investing in <a href=\"http://partnerpage.com\">X invest</a> "
                 + "you can deduct taxes and save still more for your goals ? Give it a try !", "danger"),
     };
 

@@ -1,6 +1,6 @@
+// 3rd party modules
 import React from 'react';
 import { connect, dispatch } from 'react-redux'
-
 import PageHeader from 'react-bootstrap/lib/PageHeader';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
@@ -8,13 +8,19 @@ import Alert from 'react-bootstrap/lib/Alert';
 import DropdownButton from 'react-bootstrap/lib/DropdownButton';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-
 import ChartJS from 'react-chartjs';
 
+// project modules
 import Tip from './tip.jsx';
 
+/**
+ * The main Dashboard component
+ */
 class Dashboard extends React.Component {
-
+    /**
+     * Initializes state
+     * @param {object} props
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -22,6 +28,10 @@ class Dashboard extends React.Component {
         };
     }
     
+    /**
+     * Locates a goal instance by id in the props.budget.data
+     * @param {string} id
+     */
     getGoal(id) {
         let goals = this.props.budget.data.goals;
         for (let i=0; i<goals.length; i++) {
@@ -32,6 +42,10 @@ class Dashboard extends React.Component {
         return null;
     }
     
+    /**
+     * Change state of the selectedGoal displayed in progression charts
+     * @param {string} id
+     */
     selectGoal(id) {
         let goal = this.getGoal(id);
         this.setState({
@@ -39,6 +53,9 @@ class Dashboard extends React.Component {
         });
     }
     
+    /**
+     *  React render method
+     */
     render() {
         let selectedGoal = this.state.selectedGoal;
         if (selectedGoal===null) {
@@ -79,23 +96,24 @@ class Dashboard extends React.Component {
         
         let goalProgressDatasets = {};
         let goalAmountDatasets = {};
+        let goalWeekLabels = {};
         let goalProgress = this.props.budget.data.goalProgress;
         for (let id in goalProgress) {
             if (goalProgress.hasOwnProperty(id)) {
                 let goal = this.getGoal(id);
                 goalProgressDatasets[id] = [];
                 goalAmountDatasets[id] = [];
+                goalWeekLabels[id] = [];
                 const weeks = weeksNumbers(goalProgress[id]);
                 for (let i=0; i<weeks.length; i++) {
                     if (goalProgress[id].hasOwnProperty(weeks[i])) {
                         goalProgressDatasets[id].push(goalProgress[id][weeks[i]]);
                         goalAmountDatasets[id].push(goal.amount);
+                        goalWeekLabels[id].push(weeks[i]);
                     }
                 }
             }
         }
-        
-        
         
         const chartDataBudgetRealized = {
             labels: realizedWeekLabels,
@@ -118,44 +136,45 @@ class Dashboard extends React.Component {
                 }
             ]
         };
-        var chartData2 = {
-    labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7"],
-    datasets: [
-        {
-            label: "Budget",
-            fillColor: "rgba(120,220,120,0.1)",
-            strokeColor: "rgba(120,220,120,0.8)",
-            highlightFill: "rgba(120,220,120,0.75)",
-            highlightStroke: "rgba(120,220,120,1)",
-            data: goalAmountDatasets[selectedGoal.id]//[100, 100, 100, 100, 100, 100, 100]
-        },
-        {
-            label: "Realized",
-            fillColor: "rgba(101,107,205,0.5)",
-            strokeColor: "rgba(101,107,205,0.8)",
-            highlightFill: "rgba(101,107,205,0.75)",
-            highlightStroke: "rgba(101,107,205,1)",
-            data: goalProgressDatasets[selectedGoal.id]//[12, 28, 40, 45, 47, 56, 80]
-        }
-    ]
-};
+        
+        const chartGoalProgress = {
+            labels: goalWeekLabels[selectedGoal.id] || [],
+            datasets: [
+                {
+                    label: "Budget",
+                    fillColor: "rgba(120,220,120,0.1)",
+                    strokeColor: "rgba(120,220,120,0.8)",
+                    highlightFill: "rgba(120,220,120,0.75)",
+                    highlightStroke: "rgba(120,220,120,1)",
+                    data: goalAmountDatasets[selectedGoal.id] || []
+                },
+                {
+                    label: "Realized",
+                    fillColor: "rgba(101,107,205,0.5)",
+                    strokeColor: "rgba(101,107,205,0.8)",
+                    highlightFill: "rgba(101,107,205,0.75)",
+                    highlightStroke: "rgba(101,107,205,1)",
+                    data: goalProgressDatasets[selectedGoal.id] || []
+                }
+            ]
+        };
 
-var chartOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            xAxes: [{
-                stacked: true
-            }],
-            yAxes: [{
-                stacked: true
-            }]
-        }
-    };
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                xAxes: [{
+                    stacked: true
+                }],
+                yAxes: [{
+                    stacked: true
+                }]
+            }
+        };
     
-    let goaldropdownOptions = this.props.budget.data.goals.map(goal => 
-        <MenuItem eventKey={goal.id} key={goal.id}>{goal.text}</MenuItem>
-    );
+        let goaldropdownOptions = this.props.budget.data.goals.map(goal => 
+            <MenuItem eventKey={goal.id} key={goal.id}>{goal.text}</MenuItem>
+        );
     
         return (
                 <div>
@@ -170,7 +189,7 @@ var chartOptions = {
                         <DropdownButton title={selectedGoal.text} id="bgoal-dropdown" onSelect={(eventKey, evt) => this.selectGoal(eventKey)}>
                             {goaldropdownOptions}
                         </DropdownButton>
-                        <ChartJS.Line data={chartData2} options={chartOptions} width="100" />
+                        <ChartJS.Line data={chartGoalProgress} options={chartOptions} width="100" />
                         </Col>
                         <Row>
                             {this.props.budget.data.tips.length>0 ? <Tip col={12} text={this.props.budget.data.tips[0].text} kind={this.props.budget.data.tips[0].kind} /> : null}

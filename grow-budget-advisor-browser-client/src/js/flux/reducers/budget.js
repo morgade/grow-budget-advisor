@@ -1,9 +1,6 @@
-/**
- * Budget FLUX 
- */
-
+// 3rd party modules
 import objectAssign from 'object-assign';
-
+// project modules
 import { reducer } from '../util/creators'
 import * as CommonActions from '../actions/common'
 import * as BudgetActions from '../actions/budget'
@@ -25,7 +22,7 @@ const initialState =  {
 };
 
 /**
- * Reducer handlers
+ * Budget Reducer handlers
  */
 export default reducer(initialState, {
         

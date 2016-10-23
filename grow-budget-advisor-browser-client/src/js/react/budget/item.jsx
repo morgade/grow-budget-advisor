@@ -1,12 +1,18 @@
+// 3rd party modules
 import React from 'react';
 import { connect, dispatch } from 'react-redux'
 import NumberFormat from 'react-number-format';
-
+// project modules
 import ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
 import Label from 'react-bootstrap/lib/Label';
 
+/**
+ * Simple budget item component
+ */
 class Item extends React.Component {
-
+    /**
+     * React render method
+     */
     render() {
         return (
             <ListGroupItem header={this.props.item.text}>

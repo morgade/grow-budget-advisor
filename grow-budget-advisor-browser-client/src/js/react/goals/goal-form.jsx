@@ -1,16 +1,23 @@
+// 3rd party modules
 import React from 'react';
 import { connect, dispatch } from 'react-redux'
-
 import Form from 'react-bootstrap/lib/Form';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Button from 'react-bootstrap/lib/Button';
 import Modal from 'react-bootstrap/lib/Modal';
-
+// project modules
 import * as BudgetActions from '../../flux/actions/budget'
 
+/**
+ *  A modal form to generate goals
+ */
 class GoalForm extends React.Component {
+    /**
+     * Define initial component state
+     * @param {object} props
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -20,18 +27,33 @@ class GoalForm extends React.Component {
         };
     }
     
+    /**
+     * Change state to close the modal
+     */
     close() {
         this.setState({ show: false });
     }
 
+    /**
+     * Change state to open the modal
+     */
     open() {
       this.setState({ show: true });
     }
     
+    /**
+     * Multi purpose change event handler
+     * @param {Event} evt
+     * @param {string} field
+     */
     onChange(evt, field) {
         this.setState({ [field]: evt.target.value });
     }
 
+    /**
+     * Dispatches a goal creation request and wait to close modal
+     * TODO: Validate form data
+     */
     confirm() {
       this.props.dispatch(BudgetActions.addGoalItem(
                 this.props.budget.account,
@@ -46,6 +68,9 @@ class GoalForm extends React.Component {
         });
     }
     
+    /**
+     * React render method
+     */
     render() {
         return (
             <div>

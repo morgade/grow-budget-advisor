@@ -1,12 +1,13 @@
+// 3rd party modules
 import objectAssign from 'object-assign';
-
+// project modules
 import { reducer } from '../util/creators'
 import * as CommonActions from '../actions/common'
 import * as NotificationActions from '../actions/notification'
 import * as BudgetActions from '../actions/budget'
 
 /**
- * Comments reducer state structure
+ * Notification reducer state structure
  */
 const initialState =  null;
 

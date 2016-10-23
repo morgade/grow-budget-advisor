@@ -1,18 +1,15 @@
-/**
- *  This is our index js, used to deinfe depedencies to html/css resources
- *  used by webpack
- *  
- *  Routing configuration is also here
- */
-import Index from 'file?name=[name].[ext]!../index.html';
-import BudgetLess from '../less/budget.less';
-import BootstrapCSS from 'bootstrap/dist/css/bootstrap.min.css';
-
+// 3rd party modules
 import React from 'react'
 import ReactDom from 'react-dom'
 import { Router, Route, IndexRedirect, Redirect, hashHistory } from 'react-router'
 import { Provider } from 'react-redux'
 
+// less, css and html resources
+import Index from 'file?name=[name].[ext]!../index.html';
+import BudgetLess from '../less/budget.less';
+import BootstrapCSS from 'bootstrap/dist/css/bootstrap.min.css';
+
+// project modules
 import App from './react/app.jsx';
 import Home from './react/home.jsx';
 import SignIn from './react/sign-in/sign-in.jsx';
@@ -23,6 +20,12 @@ import store from './flux/store'
 
 require('es6-promise').polyfill();
 
+/**
+ *  This is our index js, used to deinfe depedencies to html/css resources
+ *  used by webpack
+ *  
+ *  Routing configuration is also here
+ */
 ReactDom.render(
         <Provider store={store}>
             <Router history={hashHistory}>

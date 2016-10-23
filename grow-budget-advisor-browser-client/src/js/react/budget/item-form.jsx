@@ -1,6 +1,6 @@
+// 3rd party modules
 import React from 'react';
 import { connect, dispatch } from 'react-redux'
-
 import Form from 'react-bootstrap/lib/Form';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
@@ -8,9 +8,18 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import Button from 'react-bootstrap/lib/Button';
 import Modal from 'react-bootstrap/lib/Modal';
 
+// project modules
 import * as BudgetActions from '../../flux/actions/budget'
 
+/**
+ * A button / modal from to create budget iems
+ */
 class ItemForm extends React.Component {
+    
+    /**
+     * Initialize state
+     * @param {object} props
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -24,14 +33,26 @@ class ItemForm extends React.Component {
         };
     }
     
+    /**
+     * Change state to close modal
+     */
     close() {
         this.setState({ show: false });
     }
 
+    /**
+     * Change state to open modal
+     */
     open() {
       this.setState({ show: true });
     }
     
+    /**
+     * Trigger changes of several state fiels.
+     * Resets category state when changing the 'kind' 
+     * @param {Event} evt
+     * @param {string} field
+     */
     onChange(evt, field) {
         var change = { [field]: evt.target.value };
         if (field==='kind') {
@@ -40,6 +61,10 @@ class ItemForm extends React.Component {
         this.setState(change);
     }
 
+    /**
+     * Dispatches a budget creatioon request based on current state
+     * TODO: Validate form data
+     */
     confirm() {
       this.props.dispatch(BudgetActions.addBudgetItem(
                 this.props.budget.account,
@@ -55,6 +80,10 @@ class ItemForm extends React.Component {
         });
     }
     
+    /**
+     * update incomes/expenses lists com properties changing
+     * @param {object} newProps
+     */
     componentWillReceiveProps(newProps) {
         let categories = { incomes: [], expenses: [] };
         for (let i=0; i<newProps.budget.categories.length; i++) {
@@ -68,6 +97,9 @@ class ItemForm extends React.Component {
         this.setState(categories);
     }
     
+    /**
+     * React render method
+     */
     render() {
         const categories = this.state.kind === 'INCOME' ? this.state.incomes : this.state.expenses;
         const categoriesOptions = categories.map( (item) => 

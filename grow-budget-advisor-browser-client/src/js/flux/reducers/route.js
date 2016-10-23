@@ -1,18 +1,19 @@
+// 3rd party modules
 import objectAssign from 'object-assign';
-
+// project modules
 import { reducer } from '../util/creators'
 import * as RouteActions from '../actions/route'
 
 
 /**
- * Comments reducer state structure
+ * Route reducer state structure
  */
 const initialState = {
     current: '/'
 };
 
 /**
- * Notification reducer
+ * Route reducer
  */
 export default reducer(initialState, {
     

@@ -1,3 +1,4 @@
+// 3rd party modules
 import React from 'react';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
@@ -8,14 +9,24 @@ import Button from 'react-bootstrap/lib/Button';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import { connect, dispatch } from 'react-redux'
 
+// project modules
 import * as RouteActions from '../../flux/actions/route';
 
-class TitleBar extends React.Component {
-
+/**
+ * The app navbar
+ */
+class BudgetNavBar extends React.Component {
+    /**
+     * Disptches a routing action
+     * @param {string} route
+     */
     routeChange(route) {
         this.props.dispatch(RouteActions.routeChange(route));
     }
 
+    /**
+     * React render method
+     */
     render() {
         return (
             <Navbar fixedTop fluid>
@@ -61,4 +72,4 @@ class TitleBar extends React.Component {
 
 };
 
-export default connect( state => ({ budget: state.budget, route: state.route }))(TitleBar);
+export default connect( state => ({ budget: state.budget, route: state.route }))(BudgetNavBar);
