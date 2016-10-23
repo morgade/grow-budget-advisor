@@ -31,7 +31,7 @@ This challenge.... ipsum loren
 
 ### Mind The Hippo Team
 
-We've been working together for almost ten years in several projects and endeavours, always delivering state of the art simplicity.
+We've been working together for almost ten years in several projects and endeavors, always delivering state of the art simplicity.
 
 
 -- André Luiz Teixeira Novaes | @altn80 | andre.novaes@gmail.com
