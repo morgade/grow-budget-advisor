@@ -1,3 +1,7 @@
+/**
+ *  These are the budget related FLUX action creators
+ */
+
 import rest from '../util/rest'
 import * as CommonActions from './common'
 import {sync, async, route} from '../util/creators'

@@ -1,3 +1,7 @@
+/**
+ * Budget FLUX 
+ */
+
 import objectAssign from 'object-assign';
 
 import { reducer } from '../util/creators'
@@ -14,8 +18,6 @@ const initialState =  {
     pendingFetch: true,
     categories: [],
     data: { 
-//    items: [ { id:'1', category: 'PAYCHECK', amount: 100, label: 'Weekly payment' }, { id:'2', category: 'PAYCHECK', amount: 100, label: 'Weekly payment' } ],
-//    goals: [ { id:'1', text: 'TV', amount: 300}, { id:'2', text: 'Bike', amount: 100 } ]
       items: [ ],
       goals: [ ]
     }

@@ -1,3 +1,7 @@
+/**
+ *  These are some misc FLUX action creators
+ */
+
 import { hashHistory } from 'react-router'
 
 import { sync, async } from '../util/creators'

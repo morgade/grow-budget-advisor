@@ -1,3 +1,7 @@
+/**
+ *  These are FLUX actions used by the notification syste
+ */
+
 import { hashHistory } from 'react-router'
 
 import { sync } from '../util/creators'

@@ -1,3 +1,7 @@
+/**
+ * These are FLUX actions used to control the routing system
+ */
+
 import { hashHistory } from 'react-router'
 
 import { sync } from '../util/creators'

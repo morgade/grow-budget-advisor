@@ -1,3 +1,9 @@
+/**
+ *  This is our index js, used to deinfe depedencies to html/css resources
+ *  used by webpack
+ *  
+ *  Routing configuration is also here
+ */
 import Index from 'file?name=[name].[ext]!../index.html';
 import BudgetLess from '../less/budget.less';
 import BootstrapCSS from 'bootstrap/dist/css/bootstrap.min.css';
