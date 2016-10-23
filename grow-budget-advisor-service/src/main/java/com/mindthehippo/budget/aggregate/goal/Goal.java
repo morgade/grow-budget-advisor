@@ -8,11 +8,11 @@ import java.util.UUID;
  */
 public class Goal {
 
-    private UUID id;
-    private UUID account;
-    private String text;
-    private float amount;
-    private int initialWeek;
+    private final UUID id;
+    private final UUID account;
+    private final String text;
+    private final float amount;
+    private final int initialWeek;
 
     public Goal(UUID id, UUID account, String text, float amount, int initialWeek) {
         this.id = id;

@@ -20,7 +20,7 @@ import java.util.UUID;
 public interface BudgetApplicationService {
     
     
-    BudgetDTO get(UUID account);
+    BudgetDTO get(UUID account, int startWeekForRealizedData, int endWeekForRealizedData);
     
     List<Category> getItemCagories();
     

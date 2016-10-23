@@ -13,10 +13,11 @@ public class BudgetDTO {
     private String account;
     private List<ItemDTO> items;
     private List<GoalDTO> goals;
-    private float plannedBudget;
 
-    private Map<Integer, Float> weekRealized = new HashMap<>();
-    private Map<Integer, Float> weekProfit = new HashMap<>();
+    private Map<Integer, Float> weekExpenses = new HashMap<>();
+    private Map<Integer, Float> weekIncomes = new HashMap<>();
+    
+    private Map<String, Map<Integer, Float>> goalProgress = new HashMap<>();
 
     public BudgetDTO() {
         items = new ArrayList<>();
@@ -53,28 +54,30 @@ public class BudgetDTO {
         this.items = items;
     }
 
-    public Map<Integer, Float> getWeekRealized() {
-        return weekRealized;
+    
+    public Map<Integer, Float> getWeekExpenses() {
+        return weekExpenses;
     }
 
-    public void setWeekRealized(Map<Integer, Float> weekRealized) {
-        this.weekRealized = weekRealized;
+    public void setWeekExpenses(Map<Integer, Float> weekExpenses) {
+        this.weekExpenses = weekExpenses;
     }
 
-    public Map<Integer, Float> getWeekProfit() {
-        return weekProfit;
+    public Map<Integer, Float> getWeekIncomes() {
+        return weekIncomes;
     }
 
-    public void setWeekProfit(Map<Integer, Float> weekProfit) {
-        this.weekProfit = weekProfit;
+    public void setWeekIncomes(Map<Integer, Float> weekIncomes) {
+        this.weekIncomes = weekIncomes;
     }
 
-    public float getPlannedBudget() {
-        return plannedBudget;
+    public Map<String, Map<Integer, Float>> getGoalProgress() {
+        return goalProgress;
     }
 
-    public void setPlannedBudget(float plannedBudget) {
-        this.plannedBudget = plannedBudget;
+    public void setGoalProgress(Map<String, Map<Integer, Float>> goalProgress) {
+        this.goalProgress = goalProgress;
     }
+
 
 }

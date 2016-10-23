@@ -18,7 +18,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class BudgetInMemoryRepository implements BudgetRepository {
-
+    public static final String CATEGORY_PAYCHECK = "PAYCHECK";
+    public static final String CATEGORY_UTILITIES = "UTILITIES";
+    public static final String CATEGORY_TAXES = "TAXES";
+    public static final String CATEGORY_LOAN = "LOAN";
+    
     Map<UUID, Budget> budgets = new HashMap<>();
 
     @Override
@@ -32,14 +36,14 @@ public class BudgetInMemoryRepository implements BudgetRepository {
                 new Category("PAYCHECK", "Paycheck", true),
                 new Category("TAXES", "Taxes", false),
                 new Category("CREDIT_CARD", "Credit Card", false),
-                new Category("LOAN", "Loan Payment", false)
+                new Category("LOAN", "Loan Installment", false)
         );
 
     }
 
     @Override
-    public List<Goal> getGoals(UUID budget) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Goal> getGoals(UUID account) {
+        return budgets.get(account).getGoals();
     }
 
     @Override

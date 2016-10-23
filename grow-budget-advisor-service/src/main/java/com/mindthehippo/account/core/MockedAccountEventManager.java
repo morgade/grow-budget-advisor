@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class MockedAccountEventManager implements EventSource, EventDispatcher {
 
     
-    private List<Consumer<AccountEvent>> subscribers = new ArrayList();
+    private final List<Consumer<AccountEvent>> subscribers = new ArrayList();
     
     @Override
     public void subscribe(Consumer<AccountEvent> subscriber) {

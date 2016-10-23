@@ -2,6 +2,7 @@ package com.mindthehippo.budget.aggregate.budget;
 
 import com.mindthehippo.account.AccountEvent;
 import com.mindthehippo.budget.application.dto.ItemDTO;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -16,7 +17,8 @@ public class Item {
     private final Category category;
     private final float amount;
 
-    private final Map<Integer, Float> weeklyActualAmount = new HashMap<>();
+    private final Map<Integer, Float> weeklyActualExpenses = new HashMap<>();
+    private final Map<Integer, Float> weeklyActualIncome = new HashMap<>();
 
     public Item(UUID id, String text, Category category, float amount) {
         this.id = id;
@@ -41,35 +43,51 @@ public class Item {
         return category;
     }
 
-    public Map<Integer, Float> getWeeklyActualAmount() {
-        Map<Integer, Float> weeklyActualAmountClone = new HashMap<>();
-        weeklyActualAmountClone.putAll(weeklyActualAmount);
-        return weeklyActualAmountClone;
+    public Map<Integer, Float> getWeeklyActualIncome() {
+        return Collections.unmodifiableMap(weeklyActualIncome);
     }
 
-    public float getActualByWeek(int week) {
+    public Map<Integer, Float> getWeeklyActualExpenses() {
+        return Collections.unmodifiableMap(weeklyActualExpenses);
+    }
+
+    public float getActualExpensesByWeek(int week) {
         float f = 0;
-        if (weeklyActualAmount.get(week) != null) {
-            f = weeklyActualAmount.get(week);
+        if (weeklyActualExpenses.containsKey(week)) {
+            f = weeklyActualExpenses.get(week);
+        }
+        return f;
+    }
+    
+    public float getActualIncomesByWeek(int week) {
+        float f = 0;
+        if (weeklyActualIncome.containsKey(week)) {
+            f = weeklyActualIncome.get(week);
         }
         return f;
     }
 
-    public void addAccountEvent(Integer week, AccountEvent accountEvent) {
+    public void handleAccountEvent(Integer week, AccountEvent accountEvent) {
+        // TODO: Store information about all events to help forge a proccess
+        // to generate user tips into the dashboard
         float amountWeek = 0;
-        if (weeklyActualAmount.get(week) != null) {
-            amountWeek = weeklyActualAmount.get(week);
-        }
         switch (accountEvent.getType()) {
             case CREDIT:
+                if (weeklyActualIncome.get(week) != null)  {
+                    amountWeek = weeklyActualIncome.get(week);
+                }
                 amountWeek += accountEvent.getAmmount();
+                weeklyActualIncome.put(week, amountWeek);
                 break;
-            case DEBIT:
-                amountWeek -= accountEvent.getAmmount();
+            case DEBIT: 
+                if (weeklyActualExpenses.get(week) != null)  {
+                    amountWeek = weeklyActualIncome.get(week);
+                }
+                amountWeek += accountEvent.getAmmount();
+                weeklyActualExpenses.put(week, amountWeek);
                 break;
 
         }
-        weeklyActualAmount.put(week, amountWeek);
     }
 
     // TODO: Spring Converter
@@ -84,7 +102,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" + "id=" + id + ", text=" + text + ", category=" + category + ", amount=" + amount + ", weeklyActualAmount=" + weeklyActualAmount + '}';
+        return "Item{" + "id=" + id + ", text=" + text + ", category=" + category + ", amount=" + amount + ", weeklyActualExpenses=" + weeklyActualExpenses + '}';
     }
 
 }

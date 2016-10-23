@@ -3,7 +3,6 @@ package com.mindthehippo.budget.aggregate.budget;
 import com.mindthehippo.budget.aggregate.goal.Goal;
 import com.mindthehippo.budget.application.dto.BudgetDTO;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +15,7 @@ import static java.util.stream.Collectors.toList;
  */
 public class Budget {
     
-    private UUID account;
+    private final UUID account;
     private final List<Item> items;
     private final List<Goal> goals;
     
@@ -32,25 +31,18 @@ public class Budget {
         this.goals = goals;
     }
     
-    public Map<Integer, Float> getWeekProfit() {
-        Map<Integer, Float> weeklyProfit = new HashMap<>();
-        float plannedBudget = getPlannedBudget();
-        for (int i = 1; i < 54; i++) {
-            
-            float totalRealized = 0;
-            float profit = 0;
-            final int index = i;
-            totalRealized = getItems().stream().map(item -> item.getActualByWeek(index)).reduce(Float::sum).get();
-            profit = totalRealized - plannedBudget;
-            weeklyProfit.put(index, profit);
-            plannedBudget-=totalRealized;
+    public Map<Integer, Float> getGoalProgress(Goal goal, int endWeek) {
+        Map<Integer, Float> goalProgress = new HashMap<>();
+        Map<Integer, Float> expenses = getWeeklyExpenses(goal.getInitialWeek(), endWeek);
+        Map<Integer, Float> incomes = getWeeklyIncomes(goal.getInitialWeek(), endWeek);
+        for (int week = goal.getInitialWeek(); week < endWeek; week++) {
+            goalProgress.put(week, goalProgress.getOrDefault(week-1, 0f) + incomes.getOrDefault(week, 0f) - expenses.getOrDefault(week, 0f));
         }
-        return weeklyProfit;
+        return goalProgress;
     }
     
-    public float getActualBudget(int week) {
-        float f = getItems().stream().map(item -> item.getActualByWeek(week)).reduce(Float::sum).get();
-        return f;
+    public float getActualExpenses(int week) {
+        return getItems().stream().map(item -> item.getActualExpensesByWeek(week)).reduce(Float::sum).get();
     }
     
     public UUID getAccount() {
@@ -73,13 +65,30 @@ public class Budget {
         this.items.add(item);
     }
     
-    public float getPlannedBudget() {
-        float f = getItems().stream().map(Item::getAmount).reduce(Float::sum).get();
-        return f;
+    private Map<Integer, Float> getWeeklyExpenses(int startWeek, int endWeek) {
+        Map<Integer, Float> r = new HashMap<>();
+        for (int i = startWeek; i <=endWeek; i++) {
+            final int index = i;
+            float expenses = getItems().stream().filter(it->!it.getCategory().isIncome()).map(item -> item.getActualExpensesByWeek(index)).reduce(Float::sum).get();
+            r.put(index, expenses);
+        }
+        return r;
+
+    }
+
+    private Map<Integer, Float> getWeeklyIncomes(int startWeek, int endWeek) {
+        Map<Integer, Float> r = new HashMap<>();
+        for (int i = startWeek; i <=endWeek; i++) {
+            final int index = i;
+            float income = getItems().stream().filter(it->it.getCategory().isIncome()).map(item -> item.getActualIncomesByWeek(index)).reduce(Float::sum).get();
+            r.put(index, income);
+        }
+        return r;
+
     }
 
     // TODO: Spring Converter
-    public static BudgetDTO convertToDTO(Budget budget) {
+    public static BudgetDTO convertToDTO(Budget budget, int startWeek, int endWeek) {
         BudgetDTO budgetDTO = new BudgetDTO();
         budgetDTO.setAccount(budget.getAccount().toString());
         budgetDTO.getItems().addAll(
@@ -89,8 +98,14 @@ public class Budget {
                 budget.getGoals().stream().map(Goal::convertToDTO).collect(toList())
         );
         
-        budgetDTO.setWeekProfit(budget.getWeekProfit());
-        budgetDTO.setPlannedBudget(budget.getPlannedBudget());
+        Map<String, Map<Integer, Float>> goalProgresses = new HashMap<>();
+        budget.getGoals().forEach( g -> {
+            goalProgresses.put(g.getId().toString(), budget.getGoalProgress(g, endWeek));
+        });
+        
+        budgetDTO.setGoalProgress(goalProgresses);
+        budgetDTO.setWeekExpenses( budget.getWeeklyExpenses(startWeek, endWeek) );
+        budgetDTO.setWeekIncomes(budget.getWeeklyIncomes(startWeek, endWeek) );
         return budgetDTO;
     }
     

@@ -9,7 +9,7 @@ public class GoalDTO {
     private String id;
     private String text;
     private float amount;
-    private int initialWeek;
+    private Integer initialWeek;
 
     public GoalDTO() {
     }
@@ -38,11 +38,11 @@ public class GoalDTO {
         this.amount = amount;
     }
 
-    public int getInitialWeek() {
+    public Integer getInitialWeek() {
         return initialWeek;
     }
 
-    public void setInitialWeek(int initialWeek) {
+    public void setInitialWeek(Integer initialWeek) {
         this.initialWeek = initialWeek;
     }
 

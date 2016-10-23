@@ -11,10 +11,7 @@ import com.mindthehippo.budget.application.BudgetItemAccountEventMapper;
 import com.mindthehippo.budget.application.dto.BudgetDTO;
 import com.mindthehippo.budget.application.dto.GoalDTO;
 import com.mindthehippo.budget.application.dto.ItemDTO;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -47,36 +44,20 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
 
     @Override
     public void store(UUID account, GoalDTO goalDTO) {
-        Goal goal = new Goal(UUID.randomUUID(), account, goalDTO.getText(), goalDTO.getAmount(),goalDTO.getInitialWeek());
+        Goal goal = new Goal(UUID.randomUUID(), account, goalDTO.getText(), goalDTO.getAmount(),goalDTO.getInitialWeek()==null?1:goalDTO.getInitialWeek());
         budgetRepository.store(account, goal);
     }
 
     @Override
-    public BudgetDTO get(UUID account) {
+    public BudgetDTO get(UUID account, int startWeek, int endWeek) {
         Budget budget = budgetRepository.get(account);
         BudgetDTO dto;
         if (budget == null) {
             budget = new Budget(account);
             budgetRepository.store(budget);
         }
-        dto = Budget.convertToDTO(budgetRepository.get(account));
-        Map<Integer, Float> weekRealized = calculateWeeklyRealized(budget);
-        dto.setWeekRealized(weekRealized);
+        dto = Budget.convertToDTO(budgetRepository.get(account), startWeek, endWeek);
         return dto;
-    }
-
-    private Map<Integer, Float> calculateWeeklyRealized(Budget budget) {
-        Map<Integer, Float> r = new HashMap<>();
-        for (int i = 1; i <54; i++) {
-
-            float totalRealized = 0;
-            final int index = i;
-            totalRealized = budget.getItems().stream().map(item -> item.getActualByWeek(index)).reduce(Float::sum).get();
-
-            r.put(index, totalRealized);
-        }
-        return r;
-
     }
 
     @Override
@@ -89,6 +70,6 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
         Budget b = budgetRepository.get(accountEvent.getAccountId());
         Item item = budgetItemAccountEventMapper.map(b, accountEvent);
         System.out.println(item);
-        item.addAccountEvent(accountEvent.getWeek(), accountEvent);
+        item.handleAccountEvent(accountEvent.getWeek(), accountEvent);
     }
 }

@@ -4,9 +4,11 @@ import com.mindthehippo.account.AccountEvent;
 import com.mindthehippo.account.EventDispatcher;
 import com.mindthehippo.account.EventSource;
 import com.mindthehippo.account.EventType;
+import com.mindthehippo.budget.aggregate.budget.Budget;
+import com.mindthehippo.budget.aggregate.budget.BudgetRepository;
+import com.mindthehippo.budget.aggregate.budget.Item;
 import com.mindthehippo.budget.event.BudgetSubscriber;
 import com.mindthehippo.infrastructure.mock.MockService;
-import java.util.Calendar;
 import java.util.Random;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +30,25 @@ public class AppConfiguration {
     @Autowired
     EventDispatcher eventDispatcher;
 
+    @Autowired
+    BudgetRepository budgetRepository;
+    
     @EventListener
     public void handleContextRefresh(ContextRefreshedEvent event) {
-       String[] names = new String[]{"Paycheck", "Electricity", "Water/sewer"};
-        int currentWeek = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
-        for (int i = 0; i < 50; i++) {
-            Random random = new Random();
-            int weekOffset = random.nextInt(10);
-            int nameIndex = random.nextInt(3);
-            eventDispatcher.dispatch(new AccountEvent(UUID.fromString("7f713be0-b7ed-4aba-b69c-972ee3203253"),
-                     nameIndex > 0 ? EventType.DEBIT : EventType.CREDIT, names[nameIndex],
-                     nameIndex > 0 ? random.nextInt(100): random.nextInt(5000), currentWeek - weekOffset));
+//       String[] names = new String[]{"Paycheck", "Electricity", "Water/sewer"};
+       UUID account = MockService.userAccounts.get("dennis");
+        Budget budget = budgetRepository.get(account);
+        Random random = new Random(System.currentTimeMillis()); 
+        for (int i = 1; i <= 10; i++) {
+            int week = i;
+            budget.getItems().forEach( item -> {
+                    eventDispatcher.dispatch(new AccountEvent(account,
+                        item.getCategory().isIncome() ?  EventType.CREDIT : EventType.DEBIT, 
+                        item.getText(),
+                        item.getCategory().isIncome() ? item.getAmount() : ((random.nextFloat() * (random.nextInt(2)==0?1:-1) * 0.1f)+1f) *  item.getAmount(),
+                        week)
+                    );
+            });
         }
     }
     
