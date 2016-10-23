@@ -1,7 +1,6 @@
 package com.mindthehippo.budget.aggregate.budget;
 
 import com.mindthehippo.account.AccountEvent;
-import com.mindthehippo.budget.application.dto.BudgetDTO;
 import com.mindthehippo.budget.application.dto.ItemDTO;
 import java.util.HashMap;
 import java.util.Map;

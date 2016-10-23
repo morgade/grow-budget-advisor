@@ -39,7 +39,7 @@ public class AppConfiguration {
             int nameIndex = random.nextInt(3);
             eventDispatcher.dispatch(new AccountEvent(UUID.fromString("7f713be0-b7ed-4aba-b69c-972ee3203253"),
                      nameIndex > 0 ? EventType.DEBIT : EventType.CREDIT, names[nameIndex],
-                     random.nextInt(1000), currentWeek - weekOffset));
+                     nameIndex > 0 ? random.nextInt(100): random.nextInt(5000), currentWeek - weekOffset));
         }
     }
     

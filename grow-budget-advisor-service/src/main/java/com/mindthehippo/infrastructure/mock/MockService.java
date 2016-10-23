@@ -12,6 +12,7 @@ import com.mindthehippo.budget.aggregate.budget.Budget;
 import com.mindthehippo.budget.aggregate.budget.BudgetRepository;
 import com.mindthehippo.budget.aggregate.budget.Category;
 import com.mindthehippo.budget.aggregate.budget.Item;
+import com.mindthehippo.budget.aggregate.goal.Goal;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -65,7 +66,12 @@ public class MockService {
                                 categories.get(categoryIndex),
                                 random.nextInt(1000)));
             }
-
+            Goal g1 = new Goal(UUID.randomUUID(),fullAccount,"Trip to the Moon",20000000f,0);
+            Goal g2 = new Goal(UUID.randomUUID(),fullAccount,"New Boat",150000f,20);
+            Goal g3 = new Goal(UUID.randomUUID(),fullAccount,"XMas",5000f,35);
+            budgetRepository.store(fullAccount, g1);
+            budgetRepository.store(fullAccount, g2);
+            budgetRepository.store(fullAccount, g3);
 
         }
     }

@@ -47,7 +47,7 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
 
     @Override
     public void store(UUID account, GoalDTO goalDTO) {
-        Goal goal = new Goal(UUID.randomUUID(), account, goalDTO.getText(), goalDTO.getAmount());
+        Goal goal = new Goal(UUID.randomUUID(), account, goalDTO.getText(), goalDTO.getAmount(),goalDTO.getInitialWeek());
         budgetRepository.store(account, goal);
     }
 
@@ -74,7 +74,7 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
             final int index = currentWeek-i;
             totalRealized = budget.getItems().stream().map(item -> item.getActualByWeek(index)).reduce(Float::sum).get();
 
-            r.put(i, totalRealized);
+            r.put(index, totalRealized);
         }
         return r;
 
