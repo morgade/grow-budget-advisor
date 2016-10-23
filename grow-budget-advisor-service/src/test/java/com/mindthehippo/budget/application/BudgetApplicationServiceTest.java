@@ -7,6 +7,7 @@ import com.mindthehippo.budget.aggregate.budget.Item;
 import com.mindthehippo.budget.aggregate.goal.Goal;
 import com.mindthehippo.budget.application.dto.BudgetDTO;
 import com.mindthehippo.budget.application.dto.ItemDTO;
+import com.mindthehippo.infrastructure.mock.MockService;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -36,7 +37,7 @@ public class BudgetApplicationServiceTest {
     @Autowired
     BudgetApplicationService budgetApplicationService;
 
-    @MockBean
+    @Autowired
     BudgetRepository budgetRepository;
 
     public BudgetApplicationServiceTest() {
@@ -50,18 +51,6 @@ public class BudgetApplicationServiceTest {
     public static void tearDownClass() {
     }
 
-    @Before
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        UUID uuid = new UUID(10, 20);
-        Mockito.when(budgetRepository.get(Matchers.any(UUID.class))).
-                thenReturn(
-                        new Budget(uuid, Arrays.asList(new Item(UUID.randomUUID(), "Company A", new Category("UTILITIES", "UTILITIES", false), 1000F)), 
-                                Arrays.asList(new Goal(uuid, UUID.randomUUID(), "A Goal", 10,0))
-                        )
-                );
-    }
-
     @After
     public void tearDown() {
     }
@@ -71,18 +60,13 @@ public class BudgetApplicationServiceTest {
      */
     @org.junit.Test
     public void testGetItens() {
-        System.out.println("getItens");
-        UUID account = new UUID(10, 20);
+        UUID account = UUID.fromString("7f713be0-b7ed-4aba-b69c-972ee3203253");
         List<ItemDTO> items = Arrays.asList(new ItemDTO(UUID.randomUUID().toString(),
-                1000F, "Company A",
+                1000F, "Water/sewer",
                 new Category("UTILITIES", "UTILITIES", false)));
         BudgetDTO budgetDTO = new BudgetDTO(account.toString(), items, Collections.EMPTY_LIST);
         BudgetDTO expBudget = budgetApplicationService.get(account);
         assertEquals(expBudget.getAccount(), budgetDTO.getAccount());
-        assertEquals(expBudget.getItems().get(0).getText(),
-                budgetDTO.getItems().get(0).getText());
-        assertEquals(expBudget.getItems().get(0).getCategory().getId(),
-                budgetDTO.getItems().get(0).getCategory().getId());
 
     }
 }

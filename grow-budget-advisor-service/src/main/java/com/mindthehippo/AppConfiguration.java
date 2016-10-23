@@ -28,7 +28,6 @@ public class AppConfiguration {
     @Autowired
     EventDispatcher eventDispatcher;
 
-
     @EventListener
     public void handleContextRefresh(ContextRefreshedEvent event) {
        String[] names = new String[]{"Paycheck", "Electricity", "Water/sewer"};
