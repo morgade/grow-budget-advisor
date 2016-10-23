@@ -9,6 +9,13 @@ public class Goal {
     private UUID id;
     private UUID account;
     private String text;
-    private Category category;
     private float amount;
+
+    public Goal(UUID id, UUID account, String text, float amount) {
+        this.id = id;
+        this.account = account;
+        this.text = text;
+        this.amount = amount;
+    }
+
 }

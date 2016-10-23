@@ -14,6 +14,8 @@ public interface BudgetRepository {
     
     void store(UUID account, Item item);
     
+    void store(UUID account, Goal goal);
+    
     Budget get(UUID account);
     
     List<Category> getItemCategories();

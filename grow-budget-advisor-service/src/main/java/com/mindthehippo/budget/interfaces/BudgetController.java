@@ -2,6 +2,7 @@ package com.mindthehippo.budget.interfaces;
 
 import com.mindthehippo.budget.application.BudgetApplicationService;
 import com.mindthehippo.budget.application.dto.BudgetDTO;
+import com.mindthehippo.budget.application.dto.GoalDTO;
 import com.mindthehippo.budget.application.dto.ItemDTO;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,11 @@ public class BudgetController {
     @RequestMapping(path = "/budget/{accountId}/item", method = RequestMethod.POST)
     public void addItem(@PathVariable("accountId") UUID accountId, @RequestBody ItemDTO item) {
         budgetAppService.store(accountId, item);
+    }
+
+    @RequestMapping(path = "/budget/{accountId}/goal", method = RequestMethod.POST)
+    public void addGoal(@PathVariable("accountId") UUID accountId, @RequestBody GoalDTO goal) {
+        budgetAppService.store(accountId, goal);
     }
     
 }

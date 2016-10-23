@@ -49,7 +49,12 @@ public class BudgetInMemoryRepository implements BudgetRepository {
 
     @Override
     public void store(UUID account, Item item) {
-        budgets.get(account).getItems().add(item);
+        budgets.get(account).addItem(item);
+    }
+
+    @Override
+    public void store(UUID account, Goal goal) {
+        budgets.get(account).addGoal(goal);
     }
 
     @Override

@@ -8,6 +8,7 @@ package com.mindthehippo.budget.application;
 import com.mindthehippo.account.AccountEvent;
 import com.mindthehippo.budget.aggregate.budget.Category;
 import com.mindthehippo.budget.application.dto.BudgetDTO;
+import com.mindthehippo.budget.application.dto.GoalDTO;
 import com.mindthehippo.budget.application.dto.ItemDTO;
 import java.util.List;
 import java.util.UUID;
@@ -24,6 +25,8 @@ public interface BudgetApplicationService {
     List<Category> getItemCagories();
     
     void store(UUID account, ItemDTO itemDTO);
+    
+    void store(UUID account, GoalDTO goalDTO);
     
     
     //Finds and stores the budget item related to the received event

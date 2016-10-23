@@ -5,9 +5,11 @@ import com.mindthehippo.budget.aggregate.budget.Budget;
 import com.mindthehippo.budget.aggregate.budget.BudgetRepository;
 import com.mindthehippo.budget.aggregate.budget.Category;
 import com.mindthehippo.budget.aggregate.budget.Item;
+import com.mindthehippo.budget.aggregate.goal.Goal;
 import com.mindthehippo.budget.application.BudgetApplicationService;
 import com.mindthehippo.budget.application.BudgetItemAccountEventMapper;
 import com.mindthehippo.budget.application.dto.BudgetDTO;
+import com.mindthehippo.budget.application.dto.GoalDTO;
 import com.mindthehippo.budget.application.dto.ItemDTO;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -41,6 +43,12 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
                 category,
                 itemDTO.getAmount());
         budgetRepository.store(account, item);
+    }
+
+    @Override
+    public void store(UUID account, GoalDTO goalDTO) {
+        Goal goal = new Goal(account, UUID.randomUUID(), goalDTO.getText(), goalDTO.getAmount());
+        budgetRepository.store(account, goal);
     }
 
     @Override

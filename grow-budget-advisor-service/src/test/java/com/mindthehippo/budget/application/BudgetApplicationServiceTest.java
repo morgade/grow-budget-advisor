@@ -4,6 +4,7 @@ import com.mindthehippo.budget.aggregate.budget.Budget;
 import com.mindthehippo.budget.aggregate.budget.BudgetRepository;
 import com.mindthehippo.budget.aggregate.budget.Category;
 import com.mindthehippo.budget.aggregate.budget.Item;
+import com.mindthehippo.budget.aggregate.goal.Goal;
 import com.mindthehippo.budget.application.dto.BudgetDTO;
 import com.mindthehippo.budget.application.dto.ItemDTO;
 import java.util.Arrays;
@@ -53,9 +54,11 @@ public class BudgetApplicationServiceTest {
         MockitoAnnotations.initMocks(this);
         UUID uuid = new UUID(10, 20);
         Mockito.when(budgetRepository.get(Matchers.any(UUID.class))).
-                thenReturn(new Budget(uuid, Arrays.asList(new Item(UUID.randomUUID(), "Company A",
-                        new Category("UTILITIES",
-                                 "UTILITIES", false), 1000F))));
+                thenReturn(
+                        new Budget(uuid, Arrays.asList(new Item(UUID.randomUUID(), "Company A", new Category("UTILITIES", "UTILITIES", false), 1000F)), 
+                                Arrays.asList(new Goal(uuid, UUID.randomUUID(), "A Goal", 10))
+                        )
+                );
     }
 
     @After
