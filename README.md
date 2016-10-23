@@ -10,6 +10,8 @@ Budgeting Tool
 In this challenge we were asked to develop a budgeting tool which would help someone to define goals and save money in order
 to achieve those goals, considering the context of a online banking account.
 
+We, as a team, believe that this challenge fits the best with our technical skills. Almost too perfectly.
+
 ### The Tool
 
 The solution is a budget advisor tool intended to be bound to a bigger banking environment, receiveing accounting data such 
@@ -24,7 +26,7 @@ The Maven build will create a Jar file. To run the application just use java -ja
 
 ### Final Considerations
 
-
+This challenge.... ipsum loren
 
 ### Mind The Hippo Team
 
