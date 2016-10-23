@@ -36,14 +36,19 @@ The Java back end is based on Spring Boot and even though it performs no persist
 
 ### Instructions
 
-The frontend solution is a NPM NodeJS structure. To run the application just run:
+The frontend solution (grow-budget-advisor-browser-client) is a NPM NodeJS project. To run the application inside frontend project root folder:
+
     npm install
     npm run-script dev
-The backend solution was developed as a self contained application that can be deployed to a container or executed locally.
-The Maven build will create a Jar file. To run the application just use java -jar command on XXX-0.0.1-SNAPSHOT.jar. With current configurations, the embedded server will start serving on port 8080.
 
+The backend solution (grow-budget-advisor-service) was developed as a self contained application that can be deployed to a container or executed locally. The Maven build will create a Jar file. By default, backend project looks for static content at a relative path (../grow-budget-advisor-browser-client/public/). So run the application inside backend project root folder:
+
+    java -jar target/grow-budget-advisor-service-0.0.1.jar
+
+With current configurations, the embedded server will start serving on port 8080.
 
 Sign-ing with the user: 'dennis' and password: 'grow' to load some pre-defined data and start having some financial fun.
+
 
 ### Final Considerations
 
