@@ -33,10 +33,10 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
     @Override
     public void store(UUID account, ItemDTO itemDTO) {
         Category category =  budgetRepository.getItemCategories().stream()
-                .filter( c -> c.getId().toString().equals(itemDTO.getCategory()) )
+                .filter( c -> c.getId().equals(itemDTO.getCategory().getId()) )
                 .findFirst().orElseThrow( () -> new IllegalArgumentException("Invalid Category"));
         
-        Item item = new Item(UUID.fromString(itemDTO.getText()),
+        Item item = new Item(UUID.randomUUID(),
                 itemDTO.getText(),
                 category,
                 itemDTO.getAmount());

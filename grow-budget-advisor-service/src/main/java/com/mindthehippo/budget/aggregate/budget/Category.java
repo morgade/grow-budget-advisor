@@ -1,25 +1,27 @@
 package com.mindthehippo.budget.aggregate.budget;
 
-import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Budget item category value object
  */
 public class Category {
 
-    private UUID id;
+    private String id;
     private String text;
     private boolean income;
 
     public Category() {
     }
 
-    public Category(UUID id, String text, boolean income) {
+    public Category(String id, String text, boolean income) {
         this.id = id;
         this.text = text;
         this.income = income;
     }
 
+    
+    
     public boolean isIncome() {
         return income;
     }
@@ -28,7 +30,7 @@ public class Category {
         this.income = income;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
