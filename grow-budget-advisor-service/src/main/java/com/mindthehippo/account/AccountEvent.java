@@ -4,7 +4,9 @@ package com.mindthehippo.account;
 import java.util.UUID;
 
 /**
- *
+ * An account event. As our budget adviser exists with an online banking application,
+ * we could listen to account event source and analyse event stream and extract information
+ * to help our budget planning
  */
 public class AccountEvent {
     private final UUID accountId;

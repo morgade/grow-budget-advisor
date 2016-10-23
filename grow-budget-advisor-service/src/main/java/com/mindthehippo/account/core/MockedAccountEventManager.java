@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 import org.springframework.stereotype.Component;
 
 /**
- *
+ * A mocked event manager directly dispatch items to an in memory subscriber
  * @author Lucas
  */
 @Component

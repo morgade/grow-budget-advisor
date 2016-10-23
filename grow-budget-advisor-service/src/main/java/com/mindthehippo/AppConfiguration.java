@@ -6,7 +6,6 @@ import com.mindthehippo.account.EventSource;
 import com.mindthehippo.account.EventType;
 import com.mindthehippo.budget.aggregate.budget.Budget;
 import com.mindthehippo.budget.aggregate.budget.BudgetRepository;
-import com.mindthehippo.budget.aggregate.budget.Item;
 import com.mindthehippo.budget.event.BudgetSubscriber;
 import com.mindthehippo.infrastructure.mock.MockService;
 import java.util.Random;
@@ -35,7 +34,6 @@ public class AppConfiguration {
     
     @EventListener
     public void handleContextRefresh(ContextRefreshedEvent event) {
-//       String[] names = new String[]{"Paycheck", "Electricity", "Water/sewer"};
        UUID account = MockService.userAccounts.get("dennis");
         Budget budget = budgetRepository.get(account);
         Random random = new Random(System.currentTimeMillis()); 

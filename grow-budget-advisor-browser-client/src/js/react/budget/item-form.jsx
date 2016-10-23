@@ -1,5 +1,6 @@
 // 3rd party modules
 import React from 'react';
+import objectAssign from 'object-assign';
 import { connect, dispatch } from 'react-redux'
 import Form from 'react-bootstrap/lib/Form';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
@@ -31,6 +32,7 @@ class ItemForm extends React.Component {
             incomes: [ ],
             expenses: [ ]
         };
+        this.state = objectAssign({}, this.state, this.proccessCategories(props));
     }
     
     /**
@@ -81,20 +83,28 @@ class ItemForm extends React.Component {
     }
     
     /**
-     * update incomes/expenses lists com properties changing
+     * trigger update categories
      * @param {object} newProps
      */
     componentWillReceiveProps(newProps) {
+        this.setState(this.proccessCategories(newProps));
+    }
+    
+    /**
+     * update incomes/expenses lists com properties changing
+     * @param {object} props
+     */
+    proccessCategories(props) {
         let categories = { incomes: [], expenses: [] };
-        for (let i=0; i<newProps.budget.categories.length; i++) {
-            if (newProps.budget.categories[i].income) {
-                categories.incomes.push(newProps.budget.categories[i]);
+        for (let i=0; i<props.budget.categories.length; i++) {
+            if (props.budget.categories[i].income) {
+                categories.incomes.push(props.budget.categories[i]);
             } else {
-                categories.expenses.push(newProps.budget.categories[i]);
+                categories.expenses.push(props.budget.categories[i]);
             }
         }
         categories.category = categories.incomes[0] ? categories.incomes[0].id : null;
-        this.setState(categories);
+        return categories;
     }
     
     /**
@@ -108,7 +118,7 @@ class ItemForm extends React.Component {
         
         return (
             <div>
-                <Button bsStyle="primary" className="pull-right" onClick={(evt)=>this.open()}>ADD BUDGET</Button>
+                <Button bsStyle="primary" className="pull-right" onClick={(evt)=>this.open()}>ADD ITEM</Button>
                 <Modal show={this.state.show} onHide={this.close}>
                 <Modal.Header>
                     <Modal.Title>Add Buget Item</Modal.Title>

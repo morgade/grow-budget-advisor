@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
+ *This controller can be used to post mocked account events
  * @author Lucas
  */
 @RestController

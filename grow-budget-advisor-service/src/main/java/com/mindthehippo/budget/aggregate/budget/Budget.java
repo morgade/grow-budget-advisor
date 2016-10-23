@@ -10,11 +10,12 @@ import java.util.UUID;
 import static java.util.stream.Collectors.toList;
 
 /**
- * 
- * 
+ * The main budget aggregate
  */
 public class Budget {
-    
+    /**
+     * User linked account id
+     */
     private final UUID account;
     private final List<Item> items;
     private final List<Goal> goals;
