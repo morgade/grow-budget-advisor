@@ -34,10 +34,10 @@ This challenge.... ipsum loren
 
 We've been working together for almost ten years in several projects and endeavors, always delivering state of the art simplicity.
 
-
 -- André Luiz Teixeira Novaes | @altn80 | andre.novaes@gmail.com
 
 -- Lucas da Silva Lopes Furtado | @lucasslf | lucasslf@gmail.com
 
 -- Marcelo Burgos Morgade Cortizo | @morgade | morgade@gmail.com
 
+http://mindthehippo.com/
