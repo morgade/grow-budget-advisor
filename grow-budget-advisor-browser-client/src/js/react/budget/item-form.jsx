@@ -45,7 +45,10 @@ class ItemForm extends React.Component {
                     category: { id: this.state.category }
                 }
             )
-        );
+        ).then( () => { 
+            this.close();
+            this.props.dispatch(BudgetActions.fetchBudget(this.props.budget.account));
+        });
     }
     
     componentWillReceiveProps(newProps) {

@@ -61,13 +61,13 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
     private Map<Integer, Float> calculateWeeklyRealized(Budget budget) {
         int currentWeek = Calendar.getInstance().getWeekYear();
         Map<Integer, Float> r = new HashMap<>();
-        for (int i = currentWeek; i > currentWeek - 10; i--) {
-            float totalRealized = 0;
-
-            totalRealized = budget.getItems().stream().map(item -> item.getActualByWeek(currentWeek)).reduce(Float::sum).get();
-            
-            r.put(i, totalRealized);
-        }
+//        for (int i = currentWeek; i > currentWeek - 10; i--) {
+//            float totalRealized = 0;
+//
+//            totalRealized = budget.getItems().stream().map(item -> item.getActualByWeek(currentWeek)).reduce(Float::sum).get();
+//            
+//            r.put(i, totalRealized);
+//        }
         return r;
 
     }
