@@ -14,12 +14,14 @@ We, as a team, believe that this challenge fits the best with our technical skil
 
 ### The Tool
 
-The solution is a budget advisor tool intended to be bound to a bigger banking environment, receiveing accounting data such 
+The solution is a budget advisor tool intended to be bound to a bigger banking environment, receiving accounting data such 
 as credit and debit transactions from external sources.
 
 As the user informs goals and budgeting itens, the application shows valuable information and tips.
 
 In order to keep our schedule safe we decide to mock most of the data and simplify the architecture, making it monolithical but with a hint of a microservices architecture.
+
+The project focused on defining the concept and a architecture for a financial advisor that uses bank transactions information to posts charts and tips in a dashboard to support the user in the pursuit of her goals.
 
 ### Technical Overview
 
@@ -33,6 +35,8 @@ The Java back end is based on Spring Boot and even though it performs no persist
 
 The solution was developed as a self contained application that can be deployed to a container or executed locally.
 The Maven build will create a Jar file. To run the application just use java -jar command on XXX-0.0.1-SNAPSHOT.jar.
+
+Sign-ing with the user: 'dennis' and password: 'grow' to load some pre-defined data and start having some financial fun.
 
 ### Final Considerations
 
