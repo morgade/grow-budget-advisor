@@ -65,6 +65,17 @@ public class Budget {
         this.items.add(item);
     }
     
+    public Float getExpectedBalance() {
+        Float expectedIncome = getItems().stream()
+                .filter( i -> i.getCategory().isIncome() )
+                .map(item -> item.getAmount()).reduce(Float::sum).orElse(0f);
+        Float expectedExpense = getItems().stream()
+                .filter( i -> !i.getCategory().isIncome() )
+                .map(item -> item.getAmount()).reduce(Float::sum).orElse(0f);
+        
+        return expectedIncome - expectedExpense;
+    }
+    
     private Map<Integer, Float> getWeeklyExpenses(int startWeek, int endWeek) {
         Map<Integer, Float> r = new HashMap<>();
         for (int i = startWeek; i <=endWeek; i++) {
@@ -87,6 +98,14 @@ public class Budget {
 
     }
 
+    /**
+     * We used a big DTO here to push all data from the budget to the UI in de simplest way
+     * It could be broken in several lightweight parts requested by different endpoints
+     * @param budget
+     * @param startWeek
+     * @param endWeek
+     * @return 
+     */
     // TODO: Spring Converter
     public static BudgetDTO convertToDTO(Budget budget, int startWeek, int endWeek) {
         BudgetDTO budgetDTO = new BudgetDTO();
@@ -106,6 +125,7 @@ public class Budget {
         budgetDTO.setGoalProgress(goalProgresses);
         budgetDTO.setWeekExpenses( budget.getWeeklyExpenses(startWeek, endWeek) );
         budgetDTO.setWeekIncomes(budget.getWeeklyIncomes(startWeek, endWeek) );
+        budgetDTO.setExpectedBalance(budget.getExpectedBalance());
         return budgetDTO;
     }
     
