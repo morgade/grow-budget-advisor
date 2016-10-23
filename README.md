@@ -27,7 +27,7 @@ The project focused on defining the concept and a architecture for a financial a
 
 The Mind The Hippo Budgeting Advisor is a proof of concept web application developed with React Js front-end and Java back-end.
 
-Front end ipsum
+The front end is a node/npm "webpackaged" ReactJS single page application coordinated by React-Redux as FLUX helper. It fetchs data from REST enpoits provided by the Java back end. It features a dashboard presenting user charts and directioned budget tips. Also features budget item and goals creation forms.
 
 The Java back end is based on Spring Boot and even though it performs no persistence holding all the data in memory, it's fully prepared and designed to persist the data. We simulated a event sourcing comunication between a mocked external service for accounting data and the budget service. The back-end is exposed to the front-end through a REST API.
 
