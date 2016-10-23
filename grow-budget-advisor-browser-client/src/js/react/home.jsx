@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect, dispatch } from 'react-redux'
 import Button from 'react-bootstrap/lib/Button';
-
+import ChartJS from 'react-chartjs';
 
 class Home extends React.Component {
     testFetch() {
@@ -10,59 +10,6 @@ class Home extends React.Component {
     render() {
         return (
             <div>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
-            <p> HOME</p>
             <p> HOME</p>
             </div>
         );

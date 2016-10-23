@@ -33,7 +33,7 @@ class Goals extends React.Component {
                 <div>
                     <PageHeader>
                         <GoalForm />
-                        My Goals  {items.length}
+                        My Goals
                     </PageHeader>
                     
                     <ListGroup>

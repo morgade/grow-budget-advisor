@@ -12,7 +12,7 @@ import Home from './react/home.jsx';
 import SignIn from './react/sign-in/sign-in.jsx';
 import Budget from './react/budget/budget.jsx';
 import Goals from './react/goals/goals.jsx';
-import Graphs from './react/graphs/graphs.jsx';
+import Dashboard from './react/dashboard/dashboard.jsx';
 import store from './flux/store'
 
 require('es6-promise').polyfill();
@@ -26,7 +26,7 @@ ReactDom.render(
                     <Route path="sign-in" component={SignIn} />
                     <Route path="budget" component={Budget} />
                     <Route path="goals" component={Goals} />
-                    <Route path="graphs" component={Graphs} />
+                    <Route path="dashboard" component={Dashboard} />
                     <Redirect from="*" to="home" />
                 </Route>
             </Router> 

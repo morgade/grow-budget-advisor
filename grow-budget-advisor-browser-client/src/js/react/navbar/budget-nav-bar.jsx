@@ -32,8 +32,8 @@ class TitleBar extends React.Component {
                                 <NavItem onClick={()=>this.routeChange('/goals')} className={this.props.route.current==='/goals'?'active':null}>
                                     My Goals
                                 </NavItem> 
-                                <NavItem onClick={()=>this.routeChange('/graphs')} className={this.props.route.current==='/graphs'?'active':null}>
-                                    Graphs'n Tips
+                                <NavItem onClick={()=>this.routeChange('/dashboard')} className={this.props.route.current==='/graphs'?'active':null}>
+                                    Charts'n Tips
                                 </NavItem> 
                             </Nav>
                             : 
