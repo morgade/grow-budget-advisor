@@ -78,8 +78,10 @@ public class BudgetApplicationServiceTest {
         BudgetDTO budgetDTO = new BudgetDTO(account.toString(), items);
         BudgetDTO expBudget = budgetApplicationService.get(account);
         assertEquals(expBudget.getAccount(), budgetDTO.getAccount());
-        assertEquals(expBudget.getItems().get(0).getText(), budgetDTO.getItems().get(0).getText());
-        assertEquals(expBudget.getItems().get(0).getCategory(), budgetDTO.getItems().get(0).getCategory());
+        assertEquals(expBudget.getItems().get(0).getText(),
+                budgetDTO.getItems().get(0).getText());
+        assertEquals(expBudget.getItems().get(0).getCategory().getId(),
+                budgetDTO.getItems().get(0).getCategory().getId());
 
     }
 }

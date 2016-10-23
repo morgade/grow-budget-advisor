@@ -47,7 +47,8 @@ public class MockService {
     public void mock() {
         UUID fullAccount = getAccount("dennis");
         List<Category> categories = budgetRepository.getItemCategories();
-        if (budgetRepository.get(fullAccount) == null) {
+        if (!categories.isEmpty() &&
+                budgetRepository.get(fullAccount) == null) {
             budgetRepository.store(new Budget(fullAccount));
             for (int i = 0; i < 20; i++) {
                 Random random = new Random();
