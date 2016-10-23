@@ -33,7 +33,7 @@ This challenge.... ipsum loren
 We've been working together for almost ten years in several projects and endeavours, always delivering state of the art simplicity.
 
 
--- André Luis Teixeira Novaes | @altn80 | andrenovaes@gmail.com
+-- André Luiz Teixeira Novaes | @altn80 | andrenovaes@gmail.com
 
 -- Lucas da Silva Lopes Furtado | @lucasslf | lucasslf@gmail.com
 
