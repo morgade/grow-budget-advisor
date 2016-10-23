@@ -40,7 +40,8 @@ Sign-ing with the user: 'dennis' and password: 'grow' to load some pre-defined d
 
 ### Final Considerations
 
-This challenge.... ipsum loren
+
+Choosing this challenge caused in everone of us the strange feeling of being super excited but terrified at the same time. We were constantly pulling lots of interesting ideas for a savings advisor all fitting in a big scale project, but constrained by the 48 hours time box of a hackathon! Yet we decide to face the challenge to create maximum amount of code and UI that could express a glimpse of our vision to Grow. In the end, our budget advisor is the offspring of hard work as we pushed ourselves to the limit trying to cover as much ground as we could.
 
 ### Mind The Hippo Team
 
