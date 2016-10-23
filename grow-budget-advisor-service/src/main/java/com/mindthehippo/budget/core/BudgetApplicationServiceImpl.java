@@ -47,7 +47,7 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
 
     @Override
     public void store(UUID account, GoalDTO goalDTO) {
-        Goal goal = new Goal(account, UUID.randomUUID(), goalDTO.getText(), goalDTO.getAmount());
+        Goal goal = new Goal(UUID.randomUUID(), account, goalDTO.getText(), goalDTO.getAmount());
         budgetRepository.store(account, goal);
     }
 

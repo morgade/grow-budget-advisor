@@ -9,6 +9,8 @@ export const FETCH_CATEGORIES_REQUEST = 'FETCH_CATEGORIES_REQUEST';
 export const FETCH_CATEGORIES_RESPONSE = 'FETCH_CATEGORIES_RESPONSE';
 export const ADD_ITEM_REQUEST = 'ADD_ITEM_REQUEST';
 export const ADD_ITEM_RESPONSE = 'ADD_ITEM_RESPONSE';
+export const ADD_GOAL_REQUEST = 'ADD_GOAL_REQUEST';
+export const ADD_GOAL_RESPONSE = 'ADD_GOAL_RESPONSE';
 
 
 // SYNC ACTIONS
@@ -16,6 +18,8 @@ export const fetchBudgetRequest = sync(FETCH_BUDGET_REQUEST, 'account');
 export const fetchBudgetResponse = sync(FETCH_BUDGET_RESPONSE, 'budget');
 export const addItemRequest = sync(ADD_ITEM_REQUEST, 'item');
 export const addItemResponse = sync(ADD_ITEM_RESPONSE);
+export const addGoalRequest = sync(ADD_GOAL_REQUEST, 'goal');
+export const addGoalResponse = sync(ADD_GOAL_RESPONSE);
 export const fetchCategoriesRequest = sync(FETCH_CATEGORIES_REQUEST);
 export const fetchCategoriesResponse = sync(FETCH_CATEGORIES_RESPONSE, 'categories');
 
@@ -23,3 +27,4 @@ export const fetchCategoriesResponse = sync(FETCH_CATEGORIES_RESPONSE, 'categori
 export const fetchBudget = async(args => rest.get(`/budget/${args[0]}`), fetchBudgetRequest, fetchBudgetResponse, CommonActions.serviceFailure); 
 export const fetchCategories = async(args => rest.get('/category'), fetchCategoriesRequest, fetchCategoriesResponse, CommonActions.serviceFailure); 
 export const addBudgetItem = async(args => rest.post(`/budget/${args[0]}/item`, args[1]), addItemRequest, addItemResponse, CommonActions.serviceFailure); 
+export const addGoalItem = async(args => rest.post(`/budget/${args[0]}/goal`, args[1]), addGoalRequest, addGoalResponse, CommonActions.serviceFailure); 

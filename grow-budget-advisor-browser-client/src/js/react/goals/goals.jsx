@@ -6,7 +6,7 @@ import ListGroup from 'react-bootstrap/lib/ListGroup';
 import Modal from 'react-bootstrap/lib/Modal';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
 import Item from './item.jsx';
-import ItemForm from './item-form.jsx';
+import GoalForm from './goal-form.jsx';
 
 class Goals extends React.Component {
     constructor(props) {
@@ -32,25 +32,13 @@ class Goals extends React.Component {
         return (
                 <div>
                     <PageHeader>
-                        <Button bsStyle="primary" className="pull-right" onClick={(evt)=>this.open()}>ADD GOAL</Button>
-                        My Goals
+                        <GoalForm />
+                        My Goals  {items.length}
                     </PageHeader>
                     
                     <ListGroup>
                         {items}
                     </ListGroup>
-                    
-                    <Modal show={this.state.showItemModal} onHide={this.close}>
-                        <Modal.Header>
-                          <Modal.Title>Add a New Goal</Modal.Title>
-                        </Modal.Header>
-                    <Modal.Body>
-                      <ItemForm />
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button onClick={(evt)=>this.close()}>Close</Button>
-                    </Modal.Footer>
-                  </Modal>
                 </div>
         );
     }

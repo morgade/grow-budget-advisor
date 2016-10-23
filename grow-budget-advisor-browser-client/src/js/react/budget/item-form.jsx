@@ -78,7 +78,7 @@ class ItemForm extends React.Component {
                     <Modal.Title>Add Buget Item</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                        <Form onSubmit={this.login}>
+                        <Form onSubmit={(evt) => this.confirm()}>
                             <FormGroup controlId="kind">
                                 <ControlLabel>This item describes an expected</ControlLabel>
                                 <FormControl componentClass="select" value={this.state.kind} onChange={(evt) => this.onChange(evt, 'kind') }>
@@ -90,7 +90,7 @@ class ItemForm extends React.Component {
                                 <ControlLabel>Describe your budget item</ControlLabel>
                                 <FormControl type="text" placeholder="Item description" onChange={(evt) => this.onChange(evt, 'text') } />
                             </FormGroup>
-                            <FormGroup controlId="text">
+                            <FormGroup controlId="category">
                                 <ControlLabel>Choose a category that best fits your budget item</ControlLabel>
                                 <FormControl value={this.state.category} componentClass="select" placeholder="select" onChange={(evt) => this.onChange(evt, 'category') } >
                                     {categoriesOptions} 
