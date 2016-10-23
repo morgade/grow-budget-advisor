@@ -13,15 +13,17 @@ public class BudgetDTO {
     private String account;
     private List<ItemDTO> items;
     private List<GoalDTO> goals;
+    private List<TipDTO> tips;
 
     private Map<Integer, Float> weekExpenses = new HashMap<>();
     private Map<Integer, Float> weekIncomes = new HashMap<>();
-    
+
     private Map<String, Map<Integer, Float>> goalProgress = new HashMap<>();
 
     public BudgetDTO() {
         items = new ArrayList<>();
         goals = new ArrayList<>();
+        tips = new ArrayList<>();
     }
 
     public BudgetDTO(String account, List<ItemDTO> items, List<GoalDTO> goals) {
@@ -54,7 +56,14 @@ public class BudgetDTO {
         this.items = items;
     }
 
-    
+    public List<TipDTO> getTips() {
+        return tips;
+    }
+
+    public void setTips(List<TipDTO> tips) {
+        this.tips = tips;
+    }
+
     public Map<Integer, Float> getWeekExpenses() {
         return weekExpenses;
     }
@@ -78,6 +87,5 @@ public class BudgetDTO {
     public void setGoalProgress(Map<String, Map<Integer, Float>> goalProgress) {
         this.goalProgress = goalProgress;
     }
-
 
 }

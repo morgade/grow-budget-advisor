@@ -1,6 +1,5 @@
 package com.mindthehippo.budget.aggregate.budget;
 
-import com.mindthehippo.budget.aggregate.goal.Goal;
 import com.mindthehippo.budget.application.dto.BudgetDTO;
 import java.util.ArrayList;
 import java.util.Collections;

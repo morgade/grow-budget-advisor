@@ -1,4 +1,4 @@
-package com.mindthehippo.budget.aggregate.goal;
+package com.mindthehippo.budget.aggregate.budget;
 
 import com.mindthehippo.budget.application.dto.GoalDTO;
 import java.util.UUID;

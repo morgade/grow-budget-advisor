@@ -4,7 +4,7 @@ import com.mindthehippo.budget.aggregate.budget.Budget;
 import com.mindthehippo.budget.aggregate.budget.BudgetRepository;
 import com.mindthehippo.budget.aggregate.budget.Category;
 import com.mindthehippo.budget.aggregate.budget.Item;
-import com.mindthehippo.budget.aggregate.goal.Goal;
+import com.mindthehippo.budget.aggregate.budget.Goal;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
