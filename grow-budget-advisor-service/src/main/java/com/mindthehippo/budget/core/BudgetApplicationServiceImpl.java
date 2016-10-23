@@ -53,9 +53,9 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
         if (budget == null) {
             budget = new Budget(account);
             budgetRepository.store(budget);
-            dto = modelMapper.map(budget, BudgetDTO.class);
+            dto = Budget.convertToDTO(budget);
         }
-        dto = modelMapper.map(budgetRepository.get(account), BudgetDTO.class);
+        dto = Budget.convertToDTO(budgetRepository.get(account));
         Map<Integer, Float> weekRealized = calculateWeeklyRealized(budget);
         dto.setWeekRealized(weekRealized);
         return dto;
@@ -72,6 +72,7 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
             r.put(i, totalRealized);
         }
         return r;
+
     }
 
     @Override
