@@ -49,22 +49,25 @@ public class Item {
     }
     
     public float getActualByWeek(int week){
-        return weeklyActualAmount.get(week);
+        float f = 0;
+        if( weeklyActualAmount.get(week) !=null)
+            f= weeklyActualAmount.get(week);
+        return f;
     }
     
     public void addAccountEvent(Integer week, AccountEvent accountEvent){
-        float amount = weeklyActualAmount.get(week);
+        float amountWeek = weeklyActualAmount.get(week);
         switch(accountEvent.getType()){
             case CREDIT:
-                amount+=accountEvent.getAmmount();
+                amountWeek+=accountEvent.getAmmount();
                 break;
             case DEBIT:
-                amount-=accountEvent.getAmmount();
+                amountWeek-=accountEvent.getAmmount();
                 break;
               
                     
         }
-        weeklyActualAmount.put(week,amount);
+        weeklyActualAmount.put(week,amountWeek);
     }
     
     // TODO: Spring Converter
