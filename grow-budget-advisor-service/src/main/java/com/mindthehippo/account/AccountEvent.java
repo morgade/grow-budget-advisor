@@ -42,6 +42,11 @@ public class AccountEvent {
     public int getWeek() {
         return week;
     }
+
+    @Override
+    public String toString() {
+        return "AccountEvent{" + "accountId=" + accountId + ", type=" + type + ", description=" + description + ", ammount=" + ammount + ", week=" + week + '}';
+    }
     
     
 }

@@ -5,10 +5,14 @@
  */
 package com.mindthehippo.infrastructure.mock;
 
+import com.mindthehippo.account.AccountEvent;
+import com.mindthehippo.account.EventDispatcher;
+import com.mindthehippo.account.EventType;
 import com.mindthehippo.budget.aggregate.budget.Budget;
 import com.mindthehippo.budget.aggregate.budget.BudgetRepository;
 import com.mindthehippo.budget.aggregate.budget.Category;
 import com.mindthehippo.budget.aggregate.budget.Item;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,11 +26,13 @@ import org.springframework.stereotype.Component;
  *
  * @author Novaes
  */
-@Component
 public class MockService {
 
     @Autowired
     BudgetRepository budgetRepository;
+
+    @Autowired
+    private EventDispatcher eventManager;
 
     static final Map<String, UUID> userAccounts = new HashMap<>();
 
@@ -47,17 +53,20 @@ public class MockService {
     public void mock() {
         UUID fullAccount = getAccount("dennis");
         List<Category> categories = budgetRepository.getItemCategories();
-        if (!categories.isEmpty() &&
-                budgetRepository.get(fullAccount) == null) {
+        String[] names = new String[]{"Paycheck", "Electricity", "Water/sewer"};
+        if (!categories.isEmpty()
+                && budgetRepository.get(fullAccount) == null) {
             budgetRepository.store(new Budget(fullAccount));
             for (int i = 0; i < 20; i++) {
                 Random random = new Random();
                 int categoryIndex = random.nextInt(3);
                 budgetRepository.store(fullAccount,
-                        new Item(UUID.randomUUID(), "Item " + categoryIndex,
+                        new Item(UUID.randomUUID(), names[categoryIndex],
                                 categories.get(categoryIndex),
                                 random.nextInt(1000)));
             }
+
+
         }
     }
 }

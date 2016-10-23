@@ -66,13 +66,13 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
     }
 
     private Map<Integer, Float> calculateWeeklyRealized(Budget budget) {
-        int currentWeek = Calendar.getInstance().getWeekYear();
+        int currentWeek = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
         Map<Integer, Float> r = new HashMap<>();
-        for (int i = currentWeek; i > currentWeek - 10; i--) {
+        for (int i = 0; i <10; i++) {
 
             float totalRealized = 0;
-
-            totalRealized = budget.getItems().stream().map(item -> item.getActualByWeek(currentWeek)).reduce(Float::sum).get();
+            final int index = currentWeek-i;
+            totalRealized = budget.getItems().stream().map(item -> item.getActualByWeek(index)).reduce(Float::sum).get();
 
             r.put(i, totalRealized);
         }
@@ -87,10 +87,9 @@ public class BudgetApplicationServiceImpl implements BudgetApplicationService {
 
     @Override
     public void processAccountEvent(AccountEvent accountEvent) {
-        System.out.println(accountEvent.getAccountId());
         Budget b = budgetRepository.get(accountEvent.getAccountId());
-        System.out.println(b);
         Item item = budgetItemAccountEventMapper.map(b, accountEvent);
+        System.out.println(item);
         item.addAccountEvent(accountEvent.getWeek(), accountEvent);
     }
 }

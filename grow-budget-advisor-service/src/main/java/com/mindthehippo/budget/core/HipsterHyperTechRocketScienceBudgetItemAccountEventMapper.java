@@ -16,7 +16,7 @@ public class HipsterHyperTechRocketScienceBudgetItemAccountEventMapper implement
     @Override
     public Item map(Budget budget, AccountEvent accountEvent) {
         //Do some hardcore rocket science mf intelligence here
-        System.out.println("Mapping "+budget.getAccount()+" "+accountEvent.getDescription());
+        System.out.println("Mapping "+budget.getAccount()+" "+accountEvent);
         Item i = budget.getItems().stream()
                 .filter(item -> item.getText().equals(accountEvent.getDescription()))
                 .reduce((t, u) -> { return t.getAmount() > u.getAmount()?t:u;}).get();

@@ -16,8 +16,8 @@ public class Item {
     private final String text;
     private final Category category;
     private final float amount;
-    
-    private final Map<Integer,Float> weeklyActualAmount = new HashMap<>();
+
+    private final Map<Integer, Float> weeklyActualAmount = new HashMap<>();
 
     public Item(UUID id, String text, Category category, float amount) {
         this.id = id;
@@ -47,29 +47,32 @@ public class Item {
         weeklyActualAmountClone.putAll(weeklyActualAmount);
         return weeklyActualAmountClone;
     }
-    
-    public float getActualByWeek(int week){
+
+    public float getActualByWeek(int week) {
         float f = 0;
-        if( weeklyActualAmount.get(week) !=null)
-            f= weeklyActualAmount.get(week);
+        if (weeklyActualAmount.get(week) != null) {
+            f = weeklyActualAmount.get(week);
+        }
         return f;
     }
-    
-    public void addAccountEvent(Integer week, AccountEvent accountEvent){
-        float amountWeek = weeklyActualAmount.get(week);
-        switch(accountEvent.getType()){
+
+    public void addAccountEvent(Integer week, AccountEvent accountEvent) {
+        float amountWeek = 0;
+        if (weeklyActualAmount.get(week) != null) {
+            amountWeek = weeklyActualAmount.get(week);
+        }
+        switch (accountEvent.getType()) {
             case CREDIT:
-                amountWeek+=accountEvent.getAmmount();
+                amountWeek += accountEvent.getAmmount();
                 break;
             case DEBIT:
-                amountWeek-=accountEvent.getAmmount();
+                amountWeek -= accountEvent.getAmmount();
                 break;
-              
-                    
+
         }
-        weeklyActualAmount.put(week,amountWeek);
+        weeklyActualAmount.put(week, amountWeek);
     }
-    
+
     // TODO: Spring Converter
     public static ItemDTO convertToDTO(Item item) {
         ItemDTO itemDTO = new ItemDTO();
@@ -78,6 +81,11 @@ public class Item {
         itemDTO.setCategory(item.getCategory());
         itemDTO.setText(item.getText());
         return itemDTO;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" + "id=" + id + ", text=" + text + ", category=" + category + ", amount=" + amount + ", weeklyActualAmount=" + weeklyActualAmount + '}';
     }
 
 }
