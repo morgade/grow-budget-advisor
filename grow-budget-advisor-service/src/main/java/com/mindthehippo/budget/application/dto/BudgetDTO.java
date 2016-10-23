@@ -11,6 +11,7 @@ import java.util.Map;
 public class BudgetDTO {
 
     private String account;
+    private Float expectedBalance;
     private List<ItemDTO> items;
     private List<GoalDTO> goals;
 
@@ -77,6 +78,14 @@ public class BudgetDTO {
 
     public void setGoalProgress(Map<String, Map<Integer, Float>> goalProgress) {
         this.goalProgress = goalProgress;
+    }
+
+    public Float getExpectedBalance() {
+        return expectedBalance;
+    }
+
+    public void setExpectedBalance(Float expectedBalance) {
+        this.expectedBalance = expectedBalance;
     }
 
 
